@@ -12,7 +12,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -52,7 +51,6 @@ public class MainActivity extends AppCompatActivity {
                 final HashMap<String, ArrayList<String>> lights = GETfromMainServer.getAllLights();
 
 
-                Toast.makeText(getApplicationContext(), "HEY", Toast.LENGTH_LONG).show();
 
                 CountDownTimer timer = new CountDownTimer(3000, 1000) {
                     public void onTick(long millisUntilFinished) {
@@ -60,8 +58,7 @@ public class MainActivity extends AppCompatActivity {
 
                     public void onFinish()
                     {
-                        Toast.makeText(getApplicationContext(), lights.toString(), Toast.LENGTH_SHORT).show();
-                        saveLightsState(lights);
+                            saveLightsState(lights);
                     }
                 };
                 timer.start();

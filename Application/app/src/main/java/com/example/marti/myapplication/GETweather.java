@@ -38,8 +38,6 @@ public class GETweather extends Service {
                             JSONArray jsonArray = weatherInfo.getJSONArray("weather");
 
                             JSONObject js = jsonArray.getJSONObject(0);
-                            Toast.makeText(getApplicationContext(), js.getString("main"), Toast.LENGTH_LONG).show();
-                            Toast.makeText(getApplicationContext(), weatherInfo.getJSONObject("main").getString("temp"), Toast.LENGTH_LONG).show();
 
                             SharedPreferences pref = getApplicationContext().getSharedPreferences("User", MODE_PRIVATE);
                             SharedPreferences.Editor editor = pref.edit();

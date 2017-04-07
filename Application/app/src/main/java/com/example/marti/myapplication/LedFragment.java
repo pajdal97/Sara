@@ -10,7 +10,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -34,7 +33,6 @@ public class LedFragment extends Fragment {
         final HashMap<String, ArrayList<String>> lights = GETfromMainServer.getAllLights();
         ArrayList<String> states = GETfromMainServer.getOnOffStates();
 
-        Toast.makeText(getContext().getApplicationContext(),"HEY",Toast.LENGTH_LONG).show();
 
         CountDownTimer timer = new CountDownTimer(1000, 1000) {
             public void onTick(long millisUntilFinished) {
@@ -42,8 +40,7 @@ public class LedFragment extends Fragment {
 
             public void onFinish()
             {
-                Toast.makeText(getContext().getApplicationContext(), lights.toString(), Toast.LENGTH_SHORT).show();
-                saveLightsState(lights);
+                   saveLightsState(lights);
                 try
                 {
                     ledsLV.setAdapter(adapter);

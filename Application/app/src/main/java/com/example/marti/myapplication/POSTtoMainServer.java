@@ -28,8 +28,7 @@ public class POSTtoMainServer extends Service {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        Toast.makeText(getApplicationContext(),response,Toast.LENGTH_LONG).show();
-                    }
+                       }
                 }, new Response.ErrorListener() {
             public void onErrorResponse(VolleyError error) {
                 Toast.makeText(getApplicationContext(),error.getMessage(),Toast.LENGTH_LONG).show();

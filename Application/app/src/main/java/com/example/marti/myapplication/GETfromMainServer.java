@@ -35,7 +35,6 @@ public class GETfromMainServer extends Service {
                 new Response.Listener<String>(){
                     public void onResponse(String response) {
                         try {
-                            Toast.makeText(getApplicationContext(), response, Toast.LENGTH_LONG).show();
                             ArrayList<String> listState = new ArrayList<>();
                             statesOnOff=listState;
                             ArrayList<String> listId = new ArrayList<>();

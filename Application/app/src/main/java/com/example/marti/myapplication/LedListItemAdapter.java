@@ -74,7 +74,7 @@ public class LedListItemAdapter extends ArrayAdapter<LedListItem>
                     Intent postState = new Intent(getContext(), POSTtoMainServer.class);
                     getContext().startService(postState);
                     getContext().stopService(postState);
-                }
+                }F
             });
             */
         }
