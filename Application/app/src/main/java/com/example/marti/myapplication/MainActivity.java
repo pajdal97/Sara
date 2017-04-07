@@ -13,9 +13,6 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-
 public class MainActivity extends AppCompatActivity {
     Intent getStates, getWeather;
     TextView textView;
@@ -35,8 +32,8 @@ public class MainActivity extends AppCompatActivity {
         }
         checkPermissions();
 
-        getWeather = new Intent(this, GETweather.class);
-        getStates = new Intent(this, GETfromMainServer.class);
+        getWeather = new Intent(MainActivity.this, GETweather.class);
+        getStates = new Intent(MainActivity.this, GETfromMainServer.class);
         button = (Button) findViewById(R.id.button);
         startService(getStates);
         stopService(getStates);
@@ -46,13 +43,16 @@ public class MainActivity extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
-                HashMap<String, ArrayList<String>> listLights = GETfromMainServer.getAllLights();
+                Toast.makeText(getApplicationContext(),"HEY",Toast.LENGTH_LONG).show();
+                startService(getWeather);
+                stopService(getWeather);
+               /* HashMap<String, ArrayList<String>> listLights = GETfromMainServer.getAllLights();
                 ArrayList<String> ids = listLights.get("id");
                 ArrayList<String> states = listLights.get("state");
 
                 for (int i = 0; i < ids.size(); i++) {
                     Toast.makeText(getApplicationContext(), i + states.get(i), Toast.LENGTH_LONG).show();
-                }
+                }*/
 
             }
         });

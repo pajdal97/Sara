@@ -20,6 +20,20 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <service
+            android:name=".GETfromMainServer"
+            android:enabled="true"
+            android:exported="true" />
+        <service
+            android:name=".GETweather"
+            android:enabled="true"
+            android:exported="true" />
+
+        <service
+            android:name=".POSTtoMainServer"
+            android:enabled="true"
+            android:exported="true" />
         <activity
             android:name=".TabbedActivity"
             android:label="@string/title_activity_tabbed"
