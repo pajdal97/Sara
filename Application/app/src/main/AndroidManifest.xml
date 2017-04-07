@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.marti.myapplication">
-    <uses-permission android:name="android.permission.INTERNET"/>
+    package="com.example.sara_project.sara">
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -9,26 +9,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name=".Sara">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <service
-            android:name=".POSTtoMainServer"
-            android:enabled="true"
-            android:exported="true" />
-        <service
-            android:name=".GETfromMainServer"
-            android:enabled="true"
-            android:exported="true" />
-        <service
-            android:name=".GETweather"
-            android:enabled="true"
-            android:exported="true"></service>
     </application>
 
 </manifest>
