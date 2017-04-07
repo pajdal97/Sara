@@ -2,7 +2,9 @@ package com.example.marti.myapplication;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.speech.SpeechRecognizer;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -27,9 +29,25 @@ public class MainActivity extends AppCompatActivity {
         startService(getWeather);
         stopService(getWeather);
         final HashMap<String, ArrayList<String>> data = GETweather.getWeatherData();
+
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                }
         });
     }
+
+    public void recognize(View view)
+    {
+        try
+        {
+            SpeechRecognition speechRecognition = new SpeechRecognition();
+            speechRecognition.context = getApplicationContext();
+            speechRecognition.startListen();
+        }
+        catch (Exception ex)
+        {
+            Log.e("SpeechError",ex.toString());
+        }
+    }
+
 }
