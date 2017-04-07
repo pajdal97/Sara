@@ -4,8 +4,7 @@ import android.Manifest;
 import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.FragmentTransaction;
+import android.support.v4.app.*;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -62,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
         ActivityCompat.requestPermissions(MainActivity.this, new String[]{Manifest.permission.RECORD_AUDIO}, 0);
     }
     public void weatherOn(View v){
-        startActivity(new Intent(this,TabbedActivity.class));
+        startActivity(new Intent(this, FragmentActivity.class));
     }
 
     public void recognize(View view) {

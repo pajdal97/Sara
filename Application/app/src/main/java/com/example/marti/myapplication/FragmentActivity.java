@@ -1,37 +1,51 @@
 package com.example.marti.myapplication;
 
+import android.support.design.widget.TabLayout;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageView;
 
 
-public class TabbedActivity extends AppCompatActivity {
+public class FragmentActivity extends AppCompatActivity {
+
 
     private SectionsPagerAdapter mSectionsPagerAdapter;
+
 
     private ViewPager mViewPager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_tabbed);
+        setContentView(R.layout.activity_fragment_manager);
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
+
+        // Set up the ViewPager with the sections adapter.
         mViewPager = (ViewPager) findViewById(R.id.container);
         mViewPager.setAdapter(mSectionsPagerAdapter);
+
+        TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
+        tabLayout.setupWithViewPager(mViewPager);
+
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_tabbed, menu);
+        getMenuInflater().inflate(R.menu.menu_fragment_manager, menu);
         return true;
     }
 
@@ -45,6 +59,7 @@ public class TabbedActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
 
     public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
@@ -71,7 +86,6 @@ public class TabbedActivity extends AppCompatActivity {
 
         @Override
         public int getCount() {
-            // Show 3 total pages.
             return 3;
         }
 
@@ -79,12 +93,11 @@ public class TabbedActivity extends AppCompatActivity {
         public CharSequence getPageTitle(int position) {
             switch (position) {
                 case 0:
-
-                    return "SECTION 1";
+                    return  "Led";
                 case 1:
-                    return "SECTION 2";
+                    return "Weather";
                 case 2:
-                    return "SECTION 3";
+                    return "Alarm";
             }
             return null;
         }
