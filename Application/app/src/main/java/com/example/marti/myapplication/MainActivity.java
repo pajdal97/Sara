@@ -9,7 +9,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
     Intent getStates, getWeather;
@@ -42,7 +41,6 @@ public class MainActivity extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
-                Toast.makeText(getApplicationContext(),"HEY",Toast.LENGTH_LONG).show();
                 startService(getWeather);
                 stopService(getWeather);
                /* HashMap<String, ArrayList<String>> listLights = GETfromMainServer.getAllLights();
