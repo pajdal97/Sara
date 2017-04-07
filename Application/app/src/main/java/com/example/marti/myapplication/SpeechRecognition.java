@@ -9,17 +9,21 @@ import android.speech.RecognizerIntent;
 import android.speech.SpeechRecognizer;
 import android.support.v4.app.ActivityCompat;
 import android.util.Log;
+import android.widget.Toast;
 
-public class SpeechRecognition extends Activity implements RecognitionListener
+import java.io.Console;
+
+public class SpeechRecognition implements RecognitionListener
 {
+    Context context;
     public void startListen()
     {
-        SpeechRecognizer speechRecognizer = SpeechRecognizer.createSpeechRecognizer(getApplicationContext());
+        SpeechRecognizer speechRecognizer = SpeechRecognizer.createSpeechRecognizer(context.getApplicationContext());
         speechRecognizer.setRecognitionListener(this);
 
         Intent speechRecognizerIntent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
         speechRecognizerIntent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
-        speechRecognizerIntent.putExtra(RecognizerIntent.EXTRA_CALLING_PACKAGE, getPackageName());
+        speechRecognizerIntent.putExtra(RecognizerIntent.EXTRA_CALLING_PACKAGE, context.getPackageName());
 
         speechRecognizer.startListening(speechRecognizerIntent);
     }
@@ -27,19 +31,19 @@ public class SpeechRecognition extends Activity implements RecognitionListener
     @Override
     public void onBeginningOfSpeech()
     {
-        Log.i("Begin","BeginOfSpeech");
+        //System.out.println("onEvent");
     }
 
     @Override
     public void onBufferReceived(byte[] arg0)
     {
-        Log.i("Speech",arg0.toString());
+        //System.out.println("onEvent");
     }
 
     @Override
     public void onEndOfSpeech()
     {
-        Log.i("End","EndOfSpeech");
+        System.out.println("onEndOfSpeech");
     }
 
     @Override
@@ -55,26 +59,57 @@ public class SpeechRecognition extends Activity implements RecognitionListener
     @Override
     public void onEvent(int arg0, Bundle arg1)
     {
-        // TODO Auto-generated method stub
+        //System.out.println("onEvent");
     }
 
     @Override
     public void onPartialResults(android.os.Bundle partialResults)
     {
-        Log.i("Speech",partialResults.toString());
+        //System.out.println("onPartialResults");
     }
 
     @Override
     public void onReadyForSpeech(android.os.Bundle params)
     {
-        // TODO Auto-generated method stub
+        //System.out.println("onReadyForSpeech");
     }
 
     @Override
     public void onResults(android.os.Bundle results)
     {
-        String result = results.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION).get(0);
-        Log.i("Result", result);
+        String fResult = results.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION).get(0).toLowerCase();
+        String[] commands = new String[] { "turn on", "turn off", "light on", "light off", "switch on", "switch off" };
+
+        System.out.println("OnResult");
+
+        for (String command : results.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION) )
+        {
+            command = command.toLowerCase();
+            if (command.contains("sara"))
+            {
+                Log.i("SARA",command);
+                command = command.replace(" sara ", "");
+                for (int i = 0; i < commands.length; i++)
+                {
+                    if (command.contains(commands[i]))
+                    {
+                        command.replace(commands[i],"");
+                        Toast.makeText(context.getApplicationContext(),command,Toast.LENGTH_SHORT);
+                        System.out.println("COMMAND");
+
+                        if(command.contains("light"))
+                        {
+                            //request for light
+                        }
+                        else if (command.contains("alarm"))
+                        {
+                            //request for alarm
+                        }
+
+                    }
+                }
+            }
+        }
 
         startListen();
     }
@@ -83,5 +118,4 @@ public class SpeechRecognition extends Activity implements RecognitionListener
     public void onRmsChanged(float rmsdB)
     {
     }
-
 }
