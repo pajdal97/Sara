@@ -34,6 +34,10 @@
             android:name=".POSTtoMainServer"
             android:enabled="true"
             android:exported="true" />
+        <activity
+            android:name=".TabbedActivity"
+            android:label="@string/title_activity_tabbed"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

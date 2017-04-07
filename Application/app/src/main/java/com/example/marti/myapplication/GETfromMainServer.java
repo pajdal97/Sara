@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class GETfromMainServer extends Service {
+
     public GETfromMainServer() {
     }
 
@@ -30,7 +31,7 @@ public class GETfromMainServer extends Service {
         RequestQueue queue = Volley.newRequestQueue(this);
         String url = "http://192.168.1.238:5000/lights/API";
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
-                new Response.Listener<String>() {
+                new Response.Listener<String>(){
                     public void onResponse(String response) {
                         try {
                             Toast.makeText(getApplicationContext(), response, Toast.LENGTH_LONG).show();
