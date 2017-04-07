@@ -31,24 +31,28 @@ public class GETweather extends Service {
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
                     public void onResponse(String response) {
-                        Toast.makeText(getApplicationContext(), response, Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(), "HOU", Toast.LENGTH_LONG).show();
                         try {
                             JSONArray weatherInfo = new JSONArray(response);
+                            Toast.makeText(getApplicationContext(),response,Toast.LENGTH_LONG).show();
+
                             SharedPreferences pref = getApplicationContext().getSharedPreferences("User", MODE_PRIVATE);
                             SharedPreferences.Editor editor = pref.edit();
-                            Toast.makeText(getApplicationContext(), "UPDATE",Toast.LENGTH_LONG).show();
+                            for (int i=0; i<weatherInfo.length();i++){
+                                Toast.makeText(getApplicationContext(),weatherInfo.getString(i),Toast.LENGTH_LONG).show();
+                            }
                             Toast.makeText(getApplicationContext(), weatherInfo.toString(), Toast.LENGTH_LONG).show();
                             editor.apply();
                         }
                         catch (JSONException e) {
+                            Toast.makeText(getApplicationContext(),"ERROR",Toast.LENGTH_LONG).show();
                             e.printStackTrace();
                         }
 
                     }
                 }, new Response.ErrorListener() {
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(getApplicationContext(),
-                        error.getMessage(),Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "OU", Toast.LENGTH_LONG).show();
             }
         });
         queue.add(stringRequest);
