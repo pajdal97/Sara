@@ -54,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
 
                 Toast.makeText(getApplicationContext(), "HEY", Toast.LENGTH_LONG).show();
 
-                CountDownTimer timer = new CountDownTimer(10000, 1000) {
+                CountDownTimer timer = new CountDownTimer(3000, 1000) {
                     public void onTick(long millisUntilFinished) {
                     }
 
@@ -130,5 +130,6 @@ public class MainActivity extends AppCompatActivity {
             Log.e("SpeechError", ex.toString());
         }
     }
+
 
 }

@@ -10,6 +10,10 @@ import android.widget.ArrayAdapter;
 import android.widget.CompoundButton;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import java.util.ArrayList;
+import java.util.Objects;
 
 public class LedListItemAdapter extends ArrayAdapter<LedListItem> {
     private int layoutResource;
@@ -34,11 +38,21 @@ public class LedListItemAdapter extends ArrayAdapter<LedListItem> {
             TextView ledTV = (TextView) view.findViewById(R.id.ledTV);
             ledTV.setText("Light " + listItem.id);
             Switch sw = (Switch) view.findViewById(R.id.ledSwitch);
+            ArrayList<String> arrayList=GETfromMainServer.getOnOffStates();
+            Toast.makeText(getContext(),arrayList.toString(),Toast.LENGTH_LONG).show();
+            for(int i=0;i<arrayList.size();i++){
+                if (Objects.equals(arrayList.get(i), "ON ")){
+                    sw.setChecked(true);
+                }
+                else {
+                    sw.setChecked(false);
+                }
+            }
             sw.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-
                     SharedPreferences pref = getContext().getSharedPreferences("User", 0);
                     SharedPreferences.Editor editor = pref.edit();
+
                     editor.putString("lightType", String.valueOf(position));
                     if (isChecked) {
                         editor.putString("switchType","ON");

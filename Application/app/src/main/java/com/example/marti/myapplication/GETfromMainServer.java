@@ -22,6 +22,7 @@ import java.util.HashMap;
 
 public class GETfromMainServer extends Service {
 
+    private static ArrayList<String> statesOnOff;
     public GETfromMainServer() {
     }
 
@@ -36,6 +37,7 @@ public class GETfromMainServer extends Service {
                         try {
                             Toast.makeText(getApplicationContext(), response, Toast.LENGTH_LONG).show();
                             ArrayList<String> listState = new ArrayList<>();
+                            statesOnOff=listState;
                             ArrayList<String> listId = new ArrayList<>();
                             JSONArray allLights = new JSONArray(response);
                             SharedPreferences pref = getApplicationContext().getSharedPreferences("User", MODE_PRIVATE);
@@ -76,5 +78,9 @@ public class GETfromMainServer extends Service {
 
     static HashMap<String, ArrayList<String>> getAllLights() {
         return allStates;
+    }
+
+    static ArrayList<String>getOnOffStates(){
+        return statesOnOff;
     }
 }
