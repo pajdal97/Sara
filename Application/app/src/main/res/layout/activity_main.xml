@@ -2,23 +2,33 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.marti.myapplication.MainActivity">
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="WEATHER"
+        android:id="@+id/weather_button"
+        android:onClick="weatherOn"
+        android:layout_marginLeft="50dp"/>
 
     <Button
         android:id="@+id/button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Button"
-        android:layout_marginTop="100dp"/>
+        android:layout_marginTop="150dp"/>
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Recognize"
         android:layout_centerInParent="true"
-        android:onClick="recognize"/>
+        android:onClick="recognize"
+        android:id="@+id/button5"/>
+
+
 
 </RelativeLayout>

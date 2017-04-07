@@ -1,12 +1,14 @@
 package com.example.marti.myapplication;
 
 import android.Manifest;
+import android.app.Fragment;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.preference.PreferenceManager;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -26,7 +28,6 @@ public class MainActivity extends AppCompatActivity {
     private ArrayList<String> states;
     private SharedPreferences preferences;
 
-    //Nothing
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -96,6 +97,9 @@ public class MainActivity extends AppCompatActivity {
 
     private void checkPermissions() {
         ActivityCompat.requestPermissions(MainActivity.this, new String[]{Manifest.permission.RECORD_AUDIO}, 0);
+    }
+    public void weatherOn(View v){
+        startActivity(new Intent(this,TabbedActivity.class));
     }
 
     public void recognize(View view) {
