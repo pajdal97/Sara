@@ -30,22 +30,23 @@ public class AlarmFragment extends Fragment{
         View v = inflater.inflate(R.layout.fragment_alarm, container, false);
         alarmList = (ListView) v.findViewById(R.id.alarms);
         alarms = new ArrayList<>();
+        alarms.add(new Texts("March 2017","20:35 AM"));
+        alarms.add(new Texts("March 2017","20:35 AM"));
+        alarms.add(new Texts("March 2017","20:35 AM"));
+        final BaseAdapter adapter = new AlarmAdapter(getActivity(),alarms);
+        alarmList.setAdapter(adapter);
+
         v.findViewById(R.id.add_alarm).setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                addAlarm();
+                addAlarm(adapter);
             }
         });
 
-        alarms.add(new Texts("March 2017","20:35 AM"));
-        alarms.add(new Texts("March 2017","20:35 AM"));
-        alarms.add(new Texts("March 2017","20:35 AM"));
-        BaseAdapter adapter = new AlarmAdapter(getActivity(),alarms);
-        alarmList.setAdapter(adapter);
         return v;
     }
 
-    public void addAlarm(){
+    public void addAlarm(final BaseAdapter adapter){
         Calendar calendar = Calendar.getInstance();
         year = calendar.get(Calendar.YEAR);
         month = calendar.get(Calendar.MONTH);
@@ -63,6 +64,14 @@ public class AlarmFragment extends Fragment{
                     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
                         hoursFinal = hourOfDay;
                         minutesFinal = minute;
+                        StringBuilder ym = new StringBuilder();
+                        ym.append(""+yearFinal);
+                        ym.append(" "+monthFinal);
+                        StringBuilder hm = new StringBuilder();
+                        hm.append(""+hoursFinal);
+                        hm.append(" "+minutesFinal);
+                        alarms.add(new Texts(ym.toString(),hm.toString()));
+                        adapter.notifyDataSetChanged();
                     }
                 },hours, minutes, true);
                 timePickerDialog.show();
