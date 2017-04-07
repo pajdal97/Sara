@@ -2,14 +2,15 @@ package com.example.marti.myapplication;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.speech.SpeechRecognizer;
-import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.util.ArrayList;
+import java.util.HashMap;
 
 public class MainActivity extends AppCompatActivity {
     Intent getStates, getWeather;
@@ -27,22 +28,18 @@ public class MainActivity extends AppCompatActivity {
         stopService(getStates);
         startService(getWeather);
         stopService(getWeather);
-        final HashMap<String, ArrayList<String>> data = GETweather.getWeatherData();
 
         button.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
-                final String responce = GETfromMainServer.getAllLights().toString();
-                CountDownTimer timer = new CountDownTimer(5000, 1000) {
-                    public void onTick(long millisUntilFinished) {
-                    }
+                HashMap<String, ArrayList<String>> listLights = GETfromMainServer.getAllLights();
+                ArrayList<String> ids = listLights.get("id");
+                ArrayList<String> states = listLights.get("state");
 
-                    public void onFinish() {
-                        Toast.makeText(getApplicationContext(),responce,Toast.LENGTH_LONG).show();
+                for(int i=0;i<ids.size();i++){
+                    Toast.makeText(getApplicationContext(),i+states.get(i),Toast.LENGTH_LONG).show();
+                }
 
-                    }
-                };
-                timer.start();
             }
         });
     }

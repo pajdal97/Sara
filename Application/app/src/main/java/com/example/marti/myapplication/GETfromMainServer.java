@@ -34,8 +34,8 @@ public class GETfromMainServer extends Service {
                     public void onResponse(String response) {
                         try {
                             Toast.makeText(getApplicationContext(), response, Toast.LENGTH_LONG).show();
-                            ArrayList<String> listState = new ArrayList<String>();
-                            ArrayList<String> listId = new ArrayList<String>();
+                            ArrayList<String> listState = new ArrayList<>();
+                            ArrayList<String> listId = new ArrayList<>();
                             JSONArray allLights = new JSONArray(response);
                             SharedPreferences pref = getApplicationContext().getSharedPreferences("User", MODE_PRIVATE);
                             SharedPreferences.Editor editor = pref.edit();
