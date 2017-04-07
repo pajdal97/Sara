@@ -85,9 +85,6 @@ public class AlarmFragment extends Fragment{
         datePickerDialog.show();
     }
 
-    public int getSeconds(){
-
-    }
     public void addZero(StringBuilder builder,int value){
         if(value < 10){
             builder.append("0");

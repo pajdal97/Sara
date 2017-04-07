@@ -25,7 +25,7 @@ public class FragmentClass extends Fragment
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_fragment_class, container, false);
 
-        temperatureTV = (TextView) rootView.findViewById(R.id.temperatureTV);
+        //temperatureTV = (TextView) rootView.findViewById(R.id.temperatureTV);
 
         Intent getWeather = new Intent(getContext(), GETweather.class);
 
