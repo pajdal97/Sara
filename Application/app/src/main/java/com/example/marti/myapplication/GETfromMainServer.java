@@ -25,14 +25,15 @@ public class GETfromMainServer extends Service {
     }
 
     static HashMap<String, ArrayList<String>> allStates = new HashMap<>();
+
     public int onStartCommand(Intent intent, int flags, int startId) {
         RequestQueue queue = Volley.newRequestQueue(this);
         String url = "http://192.168.1.238:5000/lights/API";
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
                     public void onResponse(String response) {
-                         try {
-                             Toast.makeText(getApplicationContext(), response,Toast.LENGTH_LONG).show();
+                        try {
+                            Toast.makeText(getApplicationContext(), response, Toast.LENGTH_LONG).show();
                             ArrayList<String> listState = new ArrayList<String>();
                             ArrayList<String> listId = new ArrayList<String>();
                             JSONArray allLights = new JSONArray(response);
@@ -41,16 +42,17 @@ public class GETfromMainServer extends Service {
                             for (int i = 0; i < allLights.length(); i++) {
 
                                 JSONObject light = allLights.getJSONObject(i);
-                                listId.add(i,light.getString("id"));
-                                listState.add(i,light.getString("state"));
+                                listId.add(i, light.getString("id"));
+                                listState.add(i, light.getString("state"));
 
                             }
                             allStates.put("state", listState);
-                            allStates.put("id",listId);
-                            editor.putInt("cislo",allLights.length());
+                            allStates.put("id", listId);
+                            editor.putInt("cislo", allLights.length());
                             editor.apply();
 
-                        } catch (JSONException ignored) {}
+                        } catch (JSONException ignored) {
+                        }
                     }
                 }, new Response.ErrorListener() {
             @Override
@@ -70,7 +72,8 @@ public class GETfromMainServer extends Service {
         // TODO: Return the communication channel to the service.
         throw new UnsupportedOperationException("Not yet implemented");
     }
-    static HashMap<String, ArrayList<String>>getAllLights(){
+
+    static HashMap<String, ArrayList<String>> getAllLights() {
         return allStates;
     }
 }

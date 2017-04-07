@@ -7,9 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-
-import java.util.ArrayList;
-import java.util.HashMap;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
     Intent getStates, getWeather;
@@ -27,17 +25,17 @@ public class MainActivity extends AppCompatActivity {
         stopService(getStates);
         startService(getWeather);
         stopService(getWeather);
-        final HashMap<String, ArrayList<String>> data = GETweather.getWeatherData();
         button.setOnClickListener(new View.OnClickListener() {
 
-            String responce = GETfromMainServer.getAllLights().toString();
             public void onClick(View v) {
-                CountDownTimer timer = new CountDownTimer(10000, 1000) {
+                final String responce = GETfromMainServer.getAllLights().toString();
+                CountDownTimer timer = new CountDownTimer(5000, 1000) {
                     public void onTick(long millisUntilFinished) {
                     }
 
                     public void onFinish() {
-                        textView.setText( responce);
+                        Toast.makeText(getApplicationContext(),responce,Toast.LENGTH_LONG).show();
+
                     }
                 };
                 timer.start();
