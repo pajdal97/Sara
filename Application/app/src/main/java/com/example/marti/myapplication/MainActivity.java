@@ -7,26 +7,29 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class MainActivity extends AppCompatActivity {
-    Intent getService;
+    Intent getStates,getWeather;
     TextView textView;
     Button button;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        button=(Button)findViewById(R.id.button);
         setContentView(R.layout.activity_main);
-        getService = new Intent(this, GETweather.class);
-        startService(getService);
-        stopService(getService);
-        final HashMap<String, String> data = GETweather.getWeatherData();
+        getWeather = new Intent(this, GETweather.class);
+        getStates = new Intent(this, GETfromMainServer.class);
+        button=(Button)findViewById(R.id.button);
+        startService(getStates);
+        stopService(getStates);
+        startService(getWeather);
+        stopService(getWeather);
+        final HashMap<String, ArrayList<String>> data = GETweather.getWeatherData();
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                textView.setText(data.get("data"));
-            }
+               }
         });
     }
 }
