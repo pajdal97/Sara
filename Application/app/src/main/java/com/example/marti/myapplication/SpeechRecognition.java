@@ -82,13 +82,13 @@ public class SpeechRecognition implements RecognitionListener
 
         System.out.println("OnResult");
 
-        for (String result : results.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION) )
+        for (String command : results.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION) )
         {
-            result = result.toLowerCase();
-            if (result.contains("sara"))
+            command = command.toLowerCase();
+            if (command.contains("sara"))
             {
-                Log.i("SARA",result);
-                String command = result.replace(" sara ", "");
+                Log.i("SARA",command);
+                command = command.replace(" sara ", "");
                 for (int i = 0; i < commands.length; i++)
                 {
                     if (command.contains(commands[i]))
@@ -96,6 +96,16 @@ public class SpeechRecognition implements RecognitionListener
                         command.replace(commands[i],"");
                         Toast.makeText(context.getApplicationContext(),command,Toast.LENGTH_SHORT);
                         System.out.println("COMMAND");
+
+                        if(command.contains("light"))
+                        {
+                            //request for light
+                        }
+                        else if (command.contains("alarm"))
+                        {
+                            //request for alarm
+                        }
+
                     }
                 }
             }
