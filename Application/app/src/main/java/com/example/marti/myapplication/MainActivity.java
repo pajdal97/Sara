@@ -24,8 +24,14 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
+        try
+        {
+            setContentView(R.layout.activity_sara);
+        }
+        catch (Exception ex)
+        {
+            Log.e("asd",ex.toString());
+        }
         checkPermissions();
 
         getWeather = new Intent(this, GETweather.class);

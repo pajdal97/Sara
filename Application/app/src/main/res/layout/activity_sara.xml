@@ -5,9 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/linear1"
-
-    tools:context="com.example.sara_project.sara.Sara">
+    tools:context="com.example.marti.myapplication.MainActivity">
 
 
     <HorizontalScrollView
@@ -64,17 +62,6 @@
         android:background="@color/linear2"
         android:elevation="10dp"
         android:orientation="horizontal">
-
-        <fragment
-
-            android:id="@+id/fragment"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="20dp"
-            android:layout_weight="1"
-            android:orientation="horizontal">
-
-        </fragment>
     </LinearLayout>
 
 </LinearLayout>
