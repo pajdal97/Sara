@@ -33,10 +33,9 @@ public class LedFragment extends Fragment {
 
         final HashMap<String, ArrayList<String>> lights = GETfromMainServer.getAllLights();
 
-
         Toast.makeText(getContext().getApplicationContext(),"HEY",Toast.LENGTH_LONG).show();
 
-        CountDownTimer timer = new CountDownTimer(3000, 1000) {
+        CountDownTimer timer = new CountDownTimer(1000, 1000) {
             public void onTick(long millisUntilFinished) {
             }
 
