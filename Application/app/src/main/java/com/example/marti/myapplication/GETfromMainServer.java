@@ -28,12 +28,12 @@ public class GETfromMainServer extends Service {
 
     public int onStartCommand(Intent intent, int flags, int startId) {
         RequestQueue queue = Volley.newRequestQueue(this);
-        String url = "http://192.168.1.159:5000/lights/API";
+        String url = "http://192.168.1.238:5000/lights/API";
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
                     public void onResponse(String response) {
-                        Toast.makeText(getApplicationContext(), response, Toast.LENGTH_LONG).show();
                         try {
+                            Toast.makeText(getApplicationContext(), response, Toast.LENGTH_LONG).show();
                             ArrayList<String> listState = new ArrayList<String>();
                             ArrayList<String> listId = new ArrayList<String>();
                             JSONArray allLights = new JSONArray(response);
@@ -60,7 +60,9 @@ public class GETfromMainServer extends Service {
                 Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
+
         queue.add(stringRequest);
+        this.stopSelf();
         return super.onStartCommand(intent, flags, startId);
     }
 
@@ -70,7 +72,8 @@ public class GETfromMainServer extends Service {
         // TODO: Return the communication channel to the service.
         throw new UnsupportedOperationException("Not yet implemented");
     }
-    static HashMap<String, ArrayList<String>>getAllLights(){
+
+    static HashMap<String, ArrayList<String>> getAllLights() {
         return allStates;
     }
 }
