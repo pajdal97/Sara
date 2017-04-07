@@ -7,31 +7,43 @@
  */
 
 switch($_GET['type']) {
+
     case "door":
-        if(in_array($_GET['find_by'],array("id","name","type","recently_update"))) {
-            switch($_GET['find_by']) {
+        $listValues = array("open","close","middle");
+        break;
+
+    case "light":
+        $listValues = array("on","off");
+        break;
+}
+if(isset($listValues)) {
+    if (in_array($_GET['status'], $listValues)) {
+        if (in_array($_GET['find_by'], array("id", "name", "type", "recently_update"))) {
+            switch ($_GET['find_by']) {
                 case "id":
-                    if(isset($_GET['find_v'])) $finded = $db->query("SELECT * FROM objects WHERE id=".$_GET['find_v']);
+                    if (isset($_GET['find_v'])) $finded = $db->query("SELECT * FROM objects WHERE id=" . $_GET['find_v']);
                     else $result = "undefined_find";
                     break;
                 case "name":
-                    if(isset($_GET['find_v'])) $finded = $db->query("SELECT * FROM objects WHERE id=".$_GET['find_v']);
+                    if (isset($_GET['find_v'])) $finded = $db->query("SELECT * FROM objects WHERE name='" . $_GET['find_v'] . "'");
                     else $result = "undefined_find";
                     break;
                 case "type":
-                    if(isset($_GET['find_v'])) $finded = $db->query("SELECT * FROM objects WHERE id=".$_GET['find_v']);
-                    else $result = "undefined_find";
+                    $finded = $db->query("SELECT * FROM objects WHERE type='light'");
                     break;
                 case "recently_update":
-                    $finded = $db->query("SELECT * FROM objects WHERE id=".$_GET['find_v']);
+                    $finded = $db->query("SELECT * FROM objects WHERE timestamp > " . (time() - 60));
                     break;
             }
+            while ($row = $finded->fetch_assoc()) {
+                $db->query("UPDATE objects SET data = '" . $_GET['find_v'] . "' WHERE id=" . $row['id']);
+            }
         } else {
-            $result['error_message'] = "wrong_find_type";
+            $result['error_message'] = "undefined_find_type";
         }
-        break;
-
-    default:
-        $result['error_message'][] = "Not defined action in 'type'";
-        break;
+    } else {
+        $result['error_message'] = "wrong_value";
+    }
+} else {
+    $result['error_message'] = "undefined_type";
 }

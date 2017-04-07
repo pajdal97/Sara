@@ -9,6 +9,9 @@ include './maincore.php';
 
 $pathOrigin = $_GET['SARA_path'];
 $path = explode("/",$pathOrigin);
+if($path[count($path)-1] == "") {
+    $pathOrigin .= "index";
+}
 if($pathOrigin == "") $pathOrigin = "index";
 
 switch($path[0]) {
@@ -36,6 +39,7 @@ switch($path[0]) {
 
         break;
     default:
-        include './' . explode("?", $pathOrigin)[0] . ".php";
+        include './include/head.php';
+        include './pages/'.$pathOrigin.".php";
         break;
 }
