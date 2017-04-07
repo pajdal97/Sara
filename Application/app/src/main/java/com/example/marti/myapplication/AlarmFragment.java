@@ -2,25 +2,25 @@ package com.example.marti.myapplication;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
-import android.icu.text.DateFormat;
+import android.content.Context;
 import android.icu.util.Calendar;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.BaseAdapter;
 import android.widget.DatePicker;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.TimePicker;
-
 import java.util.ArrayList;
 
 
-public class AlarmFragment extends Fragment {
+public class AlarmFragment extends Fragment{
 
     public ListView alarmList;
-    public ArrayList<TextView> alarms;
+    public ArrayList<Texts> alarms;
     private int year, month, day , hours, minutes;
     private int yearFinal ,monthFinal , dayFinal , hoursFinal , minutesFinal;
 
@@ -29,12 +29,19 @@ public class AlarmFragment extends Fragment {
                              Bundle savedInstanceState){
         View v = inflater.inflate(R.layout.fragment_alarm, container, false);
         alarmList = (ListView) v.findViewById(R.id.alarms);
+        alarms = new ArrayList<>();
         v.findViewById(R.id.add_alarm).setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
                 addAlarm();
             }
         });
+
+        alarms.add(new Texts("March 2017","20:35 AM"));
+        alarms.add(new Texts("March 2017","20:35 AM"));
+        alarms.add(new Texts("March 2017","20:35 AM"));
+        BaseAdapter adapter = new AlarmAdapter(getActivity(),alarms);
+        alarmList.setAdapter(adapter);
         return v;
     }
 
@@ -62,5 +69,41 @@ public class AlarmFragment extends Fragment {
             }
         },year,month,day);
         datePickerDialog.show();
+    }
+
+    public class AlarmAdapter extends BaseAdapter{
+
+        private ArrayList<Texts> alarms;
+        private Context context;
+
+        public AlarmAdapter(Context context, ArrayList<Texts> alarms){
+            this.context  = context;
+            this.alarms = alarms;
+        }
+
+        @Override
+        public int getCount() {
+            return alarms.size();
+        }
+
+        @Override
+        public Object getItem(int position) {
+            return alarms.get(position);
+        }
+
+        @Override
+        public long getItemId(int position) {
+            return position;
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            View view = LayoutInflater.from(context).inflate(R.layout.alarm_layout,null);
+            TextView ym_time = (TextView) view.findViewById(R.id.year_month);
+            TextView hm_time = (TextView) view.findViewById(R.id.hour_minute);
+            ym_time.setText(alarms.get(position).getYm());
+            hm_time.setText(alarms.get(position).getHm());
+            return view;
+        }
     }
 }
