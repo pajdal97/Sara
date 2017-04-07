@@ -5,7 +5,8 @@
  * Date: 7.4.17
  * Time: 14:30
  */
-
+include './config/db.php';
+//include './lang/en/global.php';
 $db = new mysqli($config['db']['host'], $config['db']['user'], $config['db']['pass'],$config['db']['database']);
 
 $iMember = false;
