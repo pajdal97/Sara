@@ -3,6 +3,7 @@ package com.example.marti.myapplication;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
+import android.icu.text.SimpleDateFormat;
 import android.icu.util.Calendar;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -54,9 +55,9 @@ public class AlarmFragment extends Fragment{
 
         DatePickerDialog datePickerDialog = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
             @Override
-            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+            public void onDateSet(DatePicker view, int year, final int month, int dayOfMonth) {
                 yearFinal = year;
-                monthFinal = month;
+                monthFinal = month+1;
                 dayFinal = dayOfMonth;
 
                 TimePickerDialog timePickerDialog = new TimePickerDialog(getActivity(), new TimePickerDialog.OnTimeSetListener() {
@@ -65,11 +66,11 @@ public class AlarmFragment extends Fragment{
                         hoursFinal = hourOfDay;
                         minutesFinal = minute;
                         StringBuilder ym = new StringBuilder();
+                        ym.append(""+getMonth(monthFinal)+" ");
                         ym.append(""+yearFinal);
-                        ym.append(" "+monthFinal);
                         StringBuilder hm = new StringBuilder();
-                        hm.append(""+hoursFinal);
-                        hm.append(" "+minutesFinal);
+                        hm.append(""+hoursFinal+":");
+                        hm.append(""+minutesFinal+" "+getDayStage(hoursFinal));
                         alarms.add(new Texts(ym.toString(),hm.toString()));
                         adapter.notifyDataSetChanged();
                     }
@@ -80,6 +81,26 @@ public class AlarmFragment extends Fragment{
         datePickerDialog.show();
     }
 
+    public String getDayStage(int hours){
+        return hours>0 && hours<12? "AM":"PM";
+    }
+    public String getMonth(int month){
+        switch(month){
+            case 1: return "January";
+            case 2: return "February";
+            case 3: return "March";
+            case 4: return "April";
+            case 5: return "May";
+            case 6: return "June";
+            case 7: return "July";
+            case 8: return "August";
+            case 9: return "September";
+            case 10:return "October";
+            case 11:return "November";
+            case 12:return "December";
+            default:return "none";
+        }
+    }
     public class AlarmAdapter extends BaseAdapter{
 
         private ArrayList<Texts> alarms;
