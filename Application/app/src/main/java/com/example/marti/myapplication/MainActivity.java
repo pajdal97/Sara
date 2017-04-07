@@ -107,6 +107,7 @@ public class MainActivity extends AppCompatActivity {
         SharedPreferences.Editor editor = pref.edit();
         editor.putString("lightType", id);
         editor.putString("switchType", state);
+        editor.apply();
         startService(postState);
         stopService(postState);
     }
