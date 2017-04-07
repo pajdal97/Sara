@@ -58,7 +58,8 @@ public class MainActivity extends AppCompatActivity {
                     public void onTick(long millisUntilFinished) {
                     }
 
-                    public void onFinish() {
+                    public void onFinish()
+                    {
                         Toast.makeText(getApplicationContext(), lights.toString(), Toast.LENGTH_SHORT).show();
                         saveLightsState(lights);
                     }

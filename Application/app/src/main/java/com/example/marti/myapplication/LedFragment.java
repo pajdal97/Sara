@@ -32,6 +32,7 @@ public class LedFragment extends Fragment {
         adapter = new LedListItemAdapter(getContext().getApplicationContext(), R.layout.leds_list_item);
 
         final HashMap<String, ArrayList<String>> lights = GETfromMainServer.getAllLights();
+        ArrayList<String> states = GETfromMainServer.getOnOffStates();
 
 
         Toast.makeText(getContext().getApplicationContext(),"HEY",Toast.LENGTH_LONG).show();
@@ -72,7 +73,10 @@ public class LedFragment extends Fragment {
             editor.putString("light" + ids.get(i), states.get(i));
             try
             {
-                adapter.add(new LedListItem(getContext().getApplicationContext(), ids.get(i), Boolean.parseBoolean(states.get(i))));
+                if(states.get(i) == "OFF")
+                    adapter.add(new LedListItem(getContext().getApplicationContext(), ids.get(i), false));
+                else
+                    adapter.add(new LedListItem(getContext().getApplicationContext(), ids.get(i), true));
             }
             catch (Exception ex)
             {
