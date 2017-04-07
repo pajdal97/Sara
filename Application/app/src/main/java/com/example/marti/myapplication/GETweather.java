@@ -31,7 +31,6 @@ public class GETweather extends Service {
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
                     public void onResponse(String response) {
-                        Toast.makeText(getApplicationContext(), "HOU", Toast.LENGTH_LONG).show();
                         try {
                             JSONArray weatherInfo = new JSONArray(response);
                             Toast.makeText(getApplicationContext(),response,Toast.LENGTH_LONG).show();
@@ -45,14 +44,12 @@ public class GETweather extends Service {
                             editor.apply();
                         }
                         catch (JSONException e) {
-                            Toast.makeText(getApplicationContext(),"ERROR",Toast.LENGTH_LONG).show();
                             e.printStackTrace();
                         }
 
                     }
                 }, new Response.ErrorListener() {
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(getApplicationContext(), "OU", Toast.LENGTH_LONG).show();
             }
         });
         queue.add(stringRequest);
