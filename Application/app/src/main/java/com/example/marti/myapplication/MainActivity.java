@@ -1,15 +1,23 @@
 package com.example.marti.myapplication;
 
+import android.Manifest;
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.speech.SpeechRecognizer;
 import android.os.CountDownTimer;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.security.Permission;
+import java.security.Permissions;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 public class MainActivity extends AppCompatActivity {
     Intent getStates, getWeather;
@@ -20,6 +28,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        checkPermissions();
+
         getWeather = new Intent(this, GETweather.class);
         getStates = new Intent(this, GETfromMainServer.class);
         button = (Button) findViewById(R.id.button);
@@ -45,6 +56,11 @@ public class MainActivity extends AppCompatActivity {
                 timer.start();
             }
         });
+    }
+
+    private void checkPermissions()
+    {
+        ActivityCompat.requestPermissions(MainActivity.this, new String[] {Manifest.permission.RECORD_AUDIO},0);
     }
 
     public void recognize(View view)
