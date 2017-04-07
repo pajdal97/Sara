@@ -29,15 +29,14 @@
             android:name=".GETweather"
             android:enabled="true"
             android:exported="true" />
-
         <service
             android:name=".POSTtoMainServer"
             android:enabled="true"
             android:exported="true" />
-        0
+
         <activity
-            android:name=".TabbedActivity"
-            android:label="@string/title_activity_tabbed"
+            android:name=".FragmentActivity"
+            android:label="@string/title_activity_fragment_manager"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 

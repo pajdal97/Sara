@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -13,7 +14,6 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -21,18 +21,18 @@ public class POSTtoMainServer extends Service {
     public POSTtoMainServer() {
     }
 
-    static HashMap<String, ArrayList<String>> allStates = new HashMap<>();
-
     public int onStartCommand(Intent intent, int flags, int startId) {
         RequestQueue queue = Volley.newRequestQueue(this);
-        String url = "http://192.168.1.159:5000/lights/API";
+        String url = "http://192.168.1.238:5000/lights/API";
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
+                        Toast.makeText(getApplicationContext(),response,Toast.LENGTH_LONG).show();
                     }
                 }, new Response.ErrorListener() {
             public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getApplicationContext(),error.getMessage(),Toast.LENGTH_LONG).show();
             }
         }) {
             protected Map<String, String> getParams() {

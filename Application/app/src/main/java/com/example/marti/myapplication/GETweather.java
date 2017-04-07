@@ -15,6 +15,7 @@ import com.android.volley.toolbox.Volley;
 
 import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -22,6 +23,7 @@ import java.util.HashMap;
 public class GETweather extends Service {
     public GETweather() {
     }
+
     public static HashMap<String, ArrayList<String>> data;
 
 
@@ -32,36 +34,38 @@ public class GETweather extends Service {
                 new Response.Listener<String>() {
                     public void onResponse(String response) {
                         try {
-                            JSONArray weatherInfo = new JSONArray(response);
-                            Toast.makeText(getApplicationContext(),response,Toast.LENGTH_LONG).show();
+                            JSONObject weatherInfo = new JSONObject(response);
+                            JSONArray jsonArray = weatherInfo.getJSONArray("weather");
+
+                            JSONObject js = jsonArray.getJSONObject(0);
+                            Toast.makeText(getApplicationContext(), js.getString("main"), Toast.LENGTH_LONG).show();
+                            Toast.makeText(getApplicationContext(), weatherInfo.getJSONObject("main").getString("temp"), Toast.LENGTH_LONG).show();
 
                             SharedPreferences pref = getApplicationContext().getSharedPreferences("User", MODE_PRIVATE);
                             SharedPreferences.Editor editor = pref.edit();
-                            for (int i=0; i<weatherInfo.length();i++){
-                                Toast.makeText(getApplicationContext(),weatherInfo.getString(i),Toast.LENGTH_LONG).show();
-                            }
-                            Toast.makeText(getApplicationContext(), weatherInfo.toString(), Toast.LENGTH_LONG).show();
+
                             editor.apply();
-                        }
-                        catch (JSONException e) {
+                        } catch (JSONException e) {
                             e.printStackTrace();
                         }
 
                     }
                 }, new Response.ErrorListener() {
             public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
         queue.add(stringRequest);
         return super.onStartCommand(intent, flags, startId);
     }
 
-        @Override
+    @Override
     public IBinder onBind(Intent intent) {
         // TODO: Return the communication channel to the service.
         throw new UnsupportedOperationException("Not yet implemented");
     }
-    static HashMap<String, ArrayList<String>> getWeatherData(){
+
+    static HashMap<String, ArrayList<String>> getWeatherData() {
         return data;
     }
 }
