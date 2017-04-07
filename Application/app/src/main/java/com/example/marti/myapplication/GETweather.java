@@ -15,10 +15,10 @@ import com.android.volley.toolbox.Volley;
 import java.util.HashMap;
 
 public class GETweather extends Service {
-    private static HashMap<String, String> data;
-
     public GETweather() {
     }
+    public static HashMap<String, String> data;
+
 
     public int onStartCommand(Intent intent, int flags, int startId) {
         RequestQueue queue = Volley.newRequestQueue(this);
@@ -27,7 +27,7 @@ public class GETweather extends Service {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        data.put("data",response);
+                        Toast.makeText(getApplicationContext(), response, Toast.LENGTH_LONG).show();
                     }
                 }, new Response.ErrorListener() {
             public void onErrorResponse(VolleyError error) {

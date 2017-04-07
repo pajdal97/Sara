@@ -17,6 +17,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        button=(Button)findViewById(R.id.button);
         setContentView(R.layout.activity_main);
         getService = new Intent(this, GETweather.class);
         startService(getService);
