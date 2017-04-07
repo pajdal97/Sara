@@ -14,6 +14,8 @@ import android.widget.DatePicker;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
+
 import java.util.ArrayList;
 
 
@@ -49,7 +51,7 @@ public class AlarmFragment extends Fragment{
         month = calendar.get(Calendar.MONTH);
         day = calendar.get(Calendar.DAY_OF_MONTH);
 
-        DatePickerDialog datePickerDialog = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
+        DatePickerDialog datePickerDialog = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener(){
             @Override
             public void onDateSet(DatePicker view, int year, final int month, int dayOfMonth) {
                 yearFinal = year;
@@ -60,6 +62,13 @@ public class AlarmFragment extends Fragment{
                     @Override
                     public void onTimeSet(TimePicker view, int hourOfDay, int minute){
                         hours = Calendar.getInstance().get(Calendar.HOUR_OF_DAY);
+                        if(hours == 23){
+                            hours = 1;
+                        }else if(hours ==22){
+                            hours = 0;
+                        }else{
+                            hours+=2;
+                        }
                         minutes = Calendar.getInstance().get(Calendar.MINUTE);
                         hoursFinal = hourOfDay;
                         minutesFinal = minute;
@@ -76,13 +85,22 @@ public class AlarmFragment extends Fragment{
                         hm.append(""+minutesFinal+" "+getDayStage(hoursFinal));
                         alarms.add(new Texts(ym.toString(),hm.toString()));
                         adapter.notifyDataSetChanged();
-
+                        getSeconds();
                     }
                 },hours, minutes, true);
                 timePickerDialog.show();
             }
         },year,month,day);
         datePickerDialog.show();
+    }
+
+    public void getSeconds(){
+        //-2460 1:27 8:00 6
+        int a = minutes*60 + hours*3600;//to seconds
+        int b = minutesFinal*60 + hoursFinal*3600;//final to seconds
+        int finalSeconds = b - a;
+        Toast.makeText(getActivity(),finalSeconds,Toast.LENGTH_SHORT).show();
+
     }
 
     public void addZero(StringBuilder builder,int value){
