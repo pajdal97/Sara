@@ -12,9 +12,13 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
+import java.util.HashMap;
+
 public class GETweather extends Service {
     public GETweather() {
     }
+    public static HashMap<String, String> data;
+
 
     public int onStartCommand(Intent intent, int flags, int startId) {
         RequestQueue queue = Volley.newRequestQueue(this);
@@ -23,10 +27,12 @@ public class GETweather extends Service {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        Toast.makeText(getApplicationContext(),response,Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(), response, Toast.LENGTH_LONG).show();
                     }
                 }, new Response.ErrorListener() {
             public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getApplicationContext(),
+                        error.getMessage(),Toast.LENGTH_LONG).show();
             }
         });
         queue.add(stringRequest);
@@ -37,5 +43,8 @@ public class GETweather extends Service {
     public IBinder onBind(Intent intent) {
         // TODO: Return the communication channel to the service.
         throw new UnsupportedOperationException("Not yet implemented");
+    }
+    static HashMap<String, String> getWeatherData(){
+        return data;
     }
 }
