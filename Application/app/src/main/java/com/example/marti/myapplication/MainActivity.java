@@ -18,9 +18,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class MainActivity extends AppCompatActivity {
-    private Intent getStates, getWeather,postState;
+    private Intent getStates, getWeather, postState;
     private TextView textView;
-    private Button button, postButton;
+    private Button button, postButton, postButtonOn;
     private ArrayList<String> ids;
     private ArrayList<String> states;
     private SharedPreferences preferences;
@@ -30,7 +30,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_main);
-        postButton=(Button)findViewById(R.id.postButton);
+        postButton = (Button) findViewById(R.id.postButton);
+        button = (Button) findViewById(R.id.button);
+        postButtonOn = (Button) findViewById(R.id.postButtonON);
         preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
 
         checkPermissions();
@@ -38,7 +40,6 @@ public class MainActivity extends AppCompatActivity {
         getWeather = new Intent(MainActivity.this, GETweather.class);
         postState = new Intent(MainActivity.this, POSTtoMainServer.class);
         getStates = new Intent(MainActivity.this, GETfromMainServer.class);
-        button = (Button) findViewById(R.id.button);
         startService(getStates);
         stopService(getStates);
         startService(getWeather);
@@ -51,15 +52,14 @@ public class MainActivity extends AppCompatActivity {
                 final HashMap<String, ArrayList<String>> lights = GETfromMainServer.getAllLights();
 
 
-                Toast.makeText(getApplicationContext(),"HEY",Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "HEY", Toast.LENGTH_LONG).show();
 
                 CountDownTimer timer = new CountDownTimer(10000, 1000) {
                     public void onTick(long millisUntilFinished) {
                     }
 
-                    public void onFinish()
-                    {
-                        Toast.makeText(getApplicationContext(),lights.toString(),Toast.LENGTH_SHORT).show();
+                    public void onFinish() {
+                        Toast.makeText(getApplicationContext(), lights.toString(), Toast.LENGTH_SHORT).show();
                         saveLightsState(lights);
                     }
                 };
@@ -75,40 +75,48 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
-        button.setOnClickListener(new View.OnClickListener() {
 
+        postButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                SharedPreferences pref = getApplicationContext().getSharedPreferences("User", MODE_PRIVATE);
-                SharedPreferences.Editor editor = pref.edit();
-                editor.putString("lightType", "0");
-                editor.putString("switchType", "OFF");
-                startService(postState);
-                stopService(postState);
+                turn_on("0", "OFF");
+            }
+        });
+        postButtonOn.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                turn_on("0", "ON");
             }
         });
     }
 
-    private void saveLightsState(HashMap<String,ArrayList<String>> lights)
-    {
+    private void saveLightsState(HashMap<String, ArrayList<String>> lights) {
         System.out.print("a");
 
         ids = lights.get("id");
         states = lights.get("state");
 
-        for (int i = 0; i < ids.size(); i++)
-        {
+        for (int i = 0; i < ids.size(); i++) {
             SharedPreferences.Editor editor = preferences.edit();
-            editor.putString("light"+ids.get(i),states.get(i));
+            editor.putString("light" + ids.get(i), states.get(i));
 
         }
 
+    }
+
+    private void turn_on(String id, String state) {
+        SharedPreferences pref = getApplicationContext().getSharedPreferences("User", MODE_PRIVATE);
+        SharedPreferences.Editor editor = pref.edit();
+        editor.putString("lightType", id);
+        editor.putString("switchType", state);
+        startService(postState);
+        stopService(postState);
     }
 
 
     private void checkPermissions() {
         ActivityCompat.requestPermissions(MainActivity.this, new String[]{Manifest.permission.RECORD_AUDIO}, 0);
     }
-    public void weatherOn(View v){
+
+    public void weatherOn(View v) {
         startActivity(new Intent(this, FragmentActivity.class));
     }
 

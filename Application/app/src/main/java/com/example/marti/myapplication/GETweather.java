@@ -36,16 +36,14 @@ public class GETweather extends Service {
                         try {
                             JSONObject weatherInfo = new JSONObject(response);
                             JSONArray jsonArray = weatherInfo.getJSONArray("weather");
-                            JSONObject temature = weatherInfo.getJSONObject("main");
 
                             JSONObject js = jsonArray.getJSONObject(0);
                             Toast.makeText(getApplicationContext(), js.getString("main"), Toast.LENGTH_LONG).show();
-                            Toast.makeText(getApplicationContext(), temature.getString("temp"), Toast.LENGTH_LONG).show();
+                            Toast.makeText(getApplicationContext(), weatherInfo.getJSONObject("main").getString("temp"), Toast.LENGTH_LONG).show();
 
                             SharedPreferences pref = getApplicationContext().getSharedPreferences("User", MODE_PRIVATE);
                             SharedPreferences.Editor editor = pref.edit();
 
-                            Toast.makeText(getApplicationContext(), weatherInfo.toString(), Toast.LENGTH_LONG).show();
                             editor.apply();
                         } catch (JSONException e) {
                             e.printStackTrace();
