@@ -17,7 +17,6 @@ switch($_GET['type']) {
         break;
 }
 if(isset($listValues)) {
-    if (in_array($_GET['status'], $listValues)) {
         if (in_array($_GET['find_by'], array("id", "name", "type", "recently_update"))) {
             switch ($_GET['find_by']) {
                 case "id":
@@ -29,21 +28,18 @@ if(isset($listValues)) {
                     else $result = "undefined_find";
                     break;
                 case "type":
-                    $finded = $db->query("SELECT * FROM objects WHERE type='light'");
+                    $finded = $db->query("SELECT * FROM objects WHERE type='".$_GET['type']."'");
                     break;
                 case "recently_update":
                     $finded = $db->query("SELECT * FROM objects WHERE timestamp > " . (time() - 60));
                     break;
             }
             while ($row = $finded->fetch_assoc()) {
-                $db->query("UPDATE objects SET data = '" . $_GET['find_v'] . "' WHERE id=" . $row['id']);
+                $result['data'][] = $row;
             }
         } else {
             $result['error_message'] = "undefined_find_type";
         }
-    } else {
-        $result['error_message'] = "wrong_value";
-    }
 } else {
     $result['error_message'] = "undefined_type";
 }

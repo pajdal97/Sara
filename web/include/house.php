@@ -25,12 +25,45 @@ echo '<style>
     border-radius:100%;
     transition:all .3s;
     background:gray;
-    box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
+    box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.5);
+    cursor:pointer;
+}
+.light:hover {
+    border:1px solid black;
 }
 .light[light="on"] {
     background:white;
-    box-shadow: 0px 0px 80px 5px yellow;
+    box-shadow: 0px 0px 90px 20px yellow;
 }
+.door {
+    cursor:pointer;
+    position: absolute;
+    background: rgba(255,0,0,0.62);
+    top: 200px;
+    left: 395px;
+    width: 20px;
+    height: 70px;
+    border-top: 3px solid black;
+    border-bottom: 3px solid black;
+    transition:all .3s;
+}
+.door[door="open"] {
+    background: rgba(0,0,0,0.29);
+}
+.door > .door_id {
+    position:absolute;
+    left:7px;
+    top:0px;
+    height:64px;
+    width:6px;
+    background:#282828;
+    transition:all .3s;
+}
+.door[door="open"] > .door_id {
+    background:rgba(40,40,40,0.5);
+    top:-67px;
+}
+
 </style>';
 echo '<div id="house" style="position:relative;height:100px;">';
 
@@ -41,17 +74,54 @@ echo '<div id="house" style="position:relative;height:100px;">';
         while($object = $objectsR->fetch_assoc()) {
             $attr_object .= " ".$object['type']."='".$object['data']."'";
         }
-        echo '<div class="room" name="'.$room['name'].'" '.$attr_object.' style="background:'.$room['color'].';top:'.$room['top'].'px;left:'.$room['left'].'px;width:'.$room['width'].'px;height:'.$room['height'].'px;"></div>';
+        echo '<div class="room" room_id="'.$room['id'].'" name="'.$room['name'].'" '.$attr_object.' style="background:'.$room['color'].';top:'.$room['top'].'px;left:'.$room['left'].'px;width:'.$room['width'].'px;height:'.$room['height'].'px;"></div>';
     }
-echo '<script>
-function reload_objects() {
-    $.ajax({
-        method: "POST",
-        url: "some.php",
-        data: { token:"easy_token",  }
-    });
 
+    echo '<div class="door" door_id="3" style="top:150px;"><div class="door_id"></div></div>';
+    echo '<div class="door" door_id="5" style="top:320px;"><div class="door_id"></div></div>';
+    echo '<div class="door" door_id="4" style="top:300px;left:505px;"><div class="door_id"></div></div>';
+
+echo '<script>
+var lights = [];
+function reload_objects() {
+    
+    // Lights
+    
+    $.ajax({
+        method: "GET",
+        url: "http://www.ersite.cz/sara/web/api/get",
+        data: { token:"easy_token", type:"light", find_by:"type", t: Date.now },
+        success: function(data) {     
+            lights = data;
+            for(i=0;i<lights.data.length;i++) {
+                $(".light[room_id=\'"+lights.data[i].room+"\']").attr("light",lights.data[i].data);
+                $(".light[room_id=\'"+lights.data[i].room+"\']").attr("obj_id",lights.data[i].id);
+            }
+            setTimeout(function(){reload_objects()},500);
+        }
+    });
 }
+reload_objects();
+
+var doors = [];
+function reload_doors() {
+    
+    // Doors
+    
+    $.ajax({
+        method: "GET",
+        url: "http://www.ersite.cz/sara/web/api/get",
+        data: { token:"easy_token", type:"door", find_by:"type", t: Date.now },
+        success: function(data) {     
+            doors = data;
+            for(i=0;i<doors.data.length;i++) {
+                $(".door[door_id=\'"+doors.data[i].id+"\']").attr("door",doors.data[i].data); 
+            }
+            setTimeout(function(){reload_doors()},500);
+        }
+    });
+}
+setTimeout(function(){reload_doors();},250);
 $(document).ready(function(){
     var position,width,height;
     var light = [];
@@ -61,10 +131,74 @@ $(document).ready(function(){
        height = $(this).height();
        light.left = (position.left+((width/2))-15);
        light.top = (position.top+((height/2))-15);
-       $("#house").append(\'<div class="light" light="\'+($(this).attr("light"))+\'" name="\'+($(this).attr("name"))+\'" style="top:\'+(light.top)+\'px;left:\'+(light.left)+\'px;"></div>\');
+       $("#house").append(\'<div class="light" light="\'+($(this).attr("light"))+\'" name="\'+($(this).attr("name"))+\'" room_id="\'+($(this).attr("room_id"))+\'" style="top:\'+(light.top)+\'px;left:\'+(light.left)+\'px;"></div>\');
        
     });
+
+var light_set;
+$(".light").click(function(){
+    if($(this).attr("light") == "on") light_set = "off";
+    else light_set = "on";
+    $.ajax({
+        method: "GET",
+        url: "http://www.ersite.cz/sara/web/api/action",
+        data: { token:"easy_token", type:"light", status:light_set, find_by:"id", find_v:$(this).attr("obj_id"), t: Date.now },
+        success: function(data) {     
+
+        }
+    });
 });
+
+var light_set;
+$(".door").click(function(){
+    if($(this).attr("door") == "open") door_set = "close";
+    else door_set = "open";
+    $.ajax({
+        method: "GET",
+        url: "http://www.ersite.cz/sara/web/api/action",
+        data: { token:"easy_token", type:"door", status:door_set, find_by:"id", find_v:$(this).attr("door_id"), t: Date.now },
+        success: function(data) {     
+
+        }
+    });
+});
+
+
+});
+var sendApi;
+if (annyang) {
+  var commands = {
+    "*text": function(text) {
+        textArr = text.split(" ");
+        switch(textArr[0]) {
+           case "light":
+               sendApi = { token:"easy_token", type:"light", status:textArr[1], find_by:"type", t: Date.now };
+               break;
+        }
+        $.ajax({
+            method: "GET",
+            url: "http://www.ersite.cz/sara/web/api/action",
+            data: sendApi,
+            success: function(data) {     
+    
+            }
+        });
+    }
+  };
+  annyang.addCallback("resultNoMatch", function(userSaid, commandText, phrases) {
+  console.log(userSaid); 
+  console.log(commandText); 
+  console.log(phrases); 
+});
+  annyang.addCallback("soundstart", function(userSaid, commandText, phrases) {
+    annyang.resume();
+  });
+
+  
+  annyang.setLanguage("en-US");
+  annyang.addCommands(commands);
+  annyang.start();
+}
 </script>';
 
 echo '</div>';
