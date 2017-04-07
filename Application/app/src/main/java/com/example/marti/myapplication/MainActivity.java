@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         try
         {
-            setContentView(R.layout.activity_sara);
+            setContentView(R.layout.activity_main);
         }
         catch (Exception ex)
         {
