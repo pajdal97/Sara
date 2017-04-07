@@ -25,7 +25,7 @@ public class POSTtoMainServer extends Service {
 
     public int onStartCommand(Intent intent, int flags, int startId) {
         RequestQueue queue = Volley.newRequestQueue(this);
-        String url = "http://192.168.1.159:5000/lights/API";
+        String url = "http://192.168.1.238:5000/lights/API";
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
                 new Response.Listener<String>() {
                     @Override

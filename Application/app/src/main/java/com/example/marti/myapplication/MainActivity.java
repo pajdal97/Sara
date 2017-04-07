@@ -1,45 +1,42 @@
 package com.example.marti.myapplication;
 
 import android.Manifest;
-import android.app.Fragment;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.v4.app.*;
 import android.os.CountDownTimer;
 import android.preference.PreferenceManager;
 import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Timer;
 
 public class MainActivity extends AppCompatActivity {
-    private Intent getStates, getWeather;
+    private Intent getStates, getWeather,postState;
     private TextView textView;
-    private Button button;
+    private Button button, postButton;
     private ArrayList<String> ids;
     private ArrayList<String> states;
     private SharedPreferences preferences;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_main);
-
+        postButton=(Button)findViewById(R.id.postButton);
         preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
 
         checkPermissions();
 
         getWeather = new Intent(MainActivity.this, GETweather.class);
+        postState = new Intent(MainActivity.this, POSTtoMainServer.class);
         getStates = new Intent(MainActivity.this, GETfromMainServer.class);
         button = (Button) findViewById(R.id.button);
         startService(getStates);
@@ -78,6 +75,17 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+        button.setOnClickListener(new View.OnClickListener() {
+
+            public void onClick(View v) {
+                SharedPreferences pref = getApplicationContext().getSharedPreferences("User", MODE_PRIVATE);
+                SharedPreferences.Editor editor = pref.edit();
+                editor.putString("lightType", "0");
+                editor.putString("switchType", "OFF");
+                startService(postState);
+                stopService(postState);
+            }
+        });
     }
 
     private void saveLightsState(HashMap<String,ArrayList<String>> lights)
@@ -91,9 +99,11 @@ public class MainActivity extends AppCompatActivity {
         {
             SharedPreferences.Editor editor = preferences.edit();
             editor.putString("light"+ids.get(i),states.get(i));
+
         }
 
     }
+
 
     private void checkPermissions() {
         ActivityCompat.requestPermissions(MainActivity.this, new String[]{Manifest.permission.RECORD_AUDIO}, 0);

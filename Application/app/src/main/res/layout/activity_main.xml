@@ -1,34 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.marti.myapplication.MainActivity">
 
     <Button
+        android:id="@+id/weather_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="WEATHER"
-        android:id="@+id/weather_button"
+        android:layout_marginLeft="50dp"
         android:onClick="weatherOn"
-        android:layout_marginLeft="50dp"/>
+        android:text="WEATHER" />
 
     <Button
         android:id="@+id/button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Button"
-        android:layout_marginTop="150dp"/>
+        android:layout_marginTop="150dp"
+        android:text="Button" />
 
     <Button
+        android:id="@+id/postButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Recognize"
+        android:layout_marginTop="150dp"
+        android:layout_marginLeft="120dp"
+        android:text="Post" />
+
+    <Button
+        android:id="@+id/button5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:onClick="recognize"
-        android:id="@+id/button5"/>
-
+        android:text="Recognize" />
 
 
 </RelativeLayout>
