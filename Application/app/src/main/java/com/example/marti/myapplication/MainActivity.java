@@ -1,11 +1,8 @@
 package com.example.marti.myapplication;
 
 import android.Manifest;
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.speech.SpeechRecognizer;
-import android.os.CountDownTimer;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -14,11 +11,6 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-
-import java.security.Permission;
-import java.security.Permissions;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -49,30 +41,25 @@ public class MainActivity extends AppCompatActivity {
                 ArrayList<String> ids = listLights.get("id");
                 ArrayList<String> states = listLights.get("state");
 
-                for(int i=0;i<ids.size();i++){
-                    Toast.makeText(getApplicationContext(),i+states.get(i),Toast.LENGTH_LONG).show();
+                for (int i = 0; i < ids.size(); i++) {
+                    Toast.makeText(getApplicationContext(), i + states.get(i), Toast.LENGTH_LONG).show();
                 }
 
             }
         });
     }
 
-    private void checkPermissions()
-    {
-        ActivityCompat.requestPermissions(MainActivity.this, new String[] {Manifest.permission.RECORD_AUDIO},0);
+    private void checkPermissions() {
+        ActivityCompat.requestPermissions(MainActivity.this, new String[]{Manifest.permission.RECORD_AUDIO}, 0);
     }
 
-    public void recognize(View view)
-    {
-        try
-        {
+    public void recognize(View view) {
+        try {
             SpeechRecognition speechRecognition = new SpeechRecognition();
             speechRecognition.context = getApplicationContext();
             speechRecognition.startListen();
-        }
-        catch (Exception ex)
-        {
-            Log.e("SpeechError",ex.toString());
+        } catch (Exception ex) {
+            Log.e("SpeechError", ex.toString());
         }
     }
 

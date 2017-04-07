@@ -6,45 +6,55 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/linear1"
+
     tools:context="com.example.sara_project.sara.Sara">
 
 
     <HorizontalScrollView
         android:layout_width="match_parent"
-        android:layout_height="160dp"
+        android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:padding="5dp"
         android:background="@color/linear2"
-        android:fillViewport="true">
+        android:elevation="2dp"
+        android:fillViewport="true"
+        android:padding="15dp">
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:orientation="horizontal"
-            android:layout_margin="10dp"
+            android:background="@color/linear1"
+            android:elevation="8dp"
             android:gravity="center"
-            android:background="@color/linear1">
+            android:orientation="horizontal">
 
-            <ImageButton
-                android:id="@+id/imageButton3"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:layout_gravity="center"
-                app:srcCompat="@mipmap/weather" />
+            <Button
+                android:id="@+id/button1"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:background="@mipmap/bulb3"
+                android:elevation="14dp" />
 
-            <ImageButton
-                android:id="@+id/imageButton2"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:layout_gravity="center"
-                app:srcCompat="@mipmap/alarm" />
 
-            <ImageButton
-                android:id="@+id/imageButton"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                app:srcCompat="@mipmap/bulb"
-                android:layout_gravity="center" />
+            <Button
+                android:id="@+id/button2"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:background="@mipmap/alarm2"
+                android:elevation="14dp" />
+
+            <Button
+                android:id="@+id/button3"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:background="@mipmap/weather2"
+                android:elevation="14dp" />
+
+            <Button
+                android:id="@+id/button4"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:background="@mipmap/settings"
+                android:elevation="14dp" />
         </LinearLayout>
     </HorizontalScrollView>
 
@@ -52,6 +62,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/linear2"
+        android:elevation="10dp"
         android:orientation="horizontal">
 
         <fragment
