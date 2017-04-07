@@ -66,9 +66,9 @@ public class LedListItemAdapter extends ArrayAdapter<LedListItem>
 
                     editor.putString("lightType", String.valueOf(position));
                     if (isChecked) {
-                        editor.putString("switchType","ON");
+                        editor.putString("switchType", "ON");
                     } else {
-                        editor.putString("switchType","OFF");
+                        editor.putString("switchType", "OFF");
                     }
                     editor.apply();
                     Intent postState = new Intent(getContext(), POSTtoMainServer.class);
