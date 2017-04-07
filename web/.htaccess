@@ -1,0 +1,3 @@
+RewriteEngine On
+RewriteCond $1 !^(loader\.php|test|api)
+RewriteRule ^(.*)$ loader.php?SARA_path=$1 [L,QSA]
