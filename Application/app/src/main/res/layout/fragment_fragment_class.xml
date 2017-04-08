@@ -1,10 +1,10 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context="com.example.marti.myapplication.FragmentClass">
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical"
+              tools:context="com.example.marti.myapplication.FragmentClass">
 
 
     <LinearLayout
@@ -18,8 +18,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="2"
-            android:paddingLeft="10dp"
-            app:srcCompat="@drawable/weather" />
+            android:src="@mipmap/sunny"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -27,32 +26,44 @@
             android:layout_weight="1.5"
             android:orientation="vertical">
 
-            <LinearLayout
+            <TextView
+                android:id="@+id/dateTV"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="3"
-                android:orientation="vertical">
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="8dp"
+                android:ems="10"
+                android:text="8.4.2017"
+                android:textSize="20sp"/>
 
-                <TextView
-                    android:id="@+id/clouds"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1.00"
-                    android:text="Clouds"
-                    android:gravity="center"
-                    android:textSize="20sp"
-                    android:textStyle="bold"/>
 
-                <TextView
-                    android:id="@+id/tempeature"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="8°C"
-                    android:textSize="20sp"
-                    android:textStyle="bold"/>
-            </LinearLayout>
+            <TextView
+                android:id="@+id/timeTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="8dp"
+                android:ems="10"
+                android:text="Time"
+                android:textSize="20sp"/>
+
+            <TextView
+                android:id="@+id/clouds"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="8dp"
+                android:text="Clouds"
+                android:textSize="20sp"/>
+
+            <TextView
+                android:id="@+id/tempeatureTV"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="8dp"
+                android:text="8°C"
+                android:textSize="20sp"/>
 
         </LinearLayout>
 
@@ -74,28 +85,23 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="House status:"
-                android:textSize="30sp"
-                android:textStyle="bold"
-                android:layout_marginLeft="10dp"/>
+                android:layout_marginLeft="10dp"
+                android:textSize="23dp"/>
 
             <Button
                 android:id="@+id/button1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:background="#76ff03"
                 android:clickable="false"
-                android:text="Protected"
-                android:textStyle="bold" />
+                android:text="Protected"/>
 
             <TextView
                 android:id="@+id/textView6"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="All lights: "
-                android:textSize="30sp"
-                android:textStyle="bold"
-                android:layout_marginLeft="10dp"/>
+                android:layout_marginLeft="10dp"
+                android:textSize="23dp"/>
 
             <TextView
                 android:id="@+id/button2"
@@ -104,26 +110,21 @@
                 android:clickable="false"
                 android:gravity="center"
                 android:text="Turned off"
-                android:textSize="25sp"
-                android:textStyle="bold" />
+                android:textSize="20dp"/>
 
             <TextView
                 android:id="@+id/textView7"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
                 android:text="Door: "
-                android:textSize="30sp"
-                android:textStyle="bold"
-                android:layout_marginLeft="10dp"/>
+                android:textSize="23dp"/>
 
             <Button
                 android:id="@+id/button3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:background="#c5cae9"
-                android:text="Open log"
-                android:textStyle="bold" />
+                android:text="Open log"/>
 
         </LinearLayout>
     </LinearLayout>
