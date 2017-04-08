@@ -82,6 +82,19 @@ public class SpeechRecognition implements RecognitionListener
             command = command.toLowerCase();
             Log.i("SARA", command);
             command = command.replace(" sara ", "");
+            if(command.contains("open main door"))
+            {
+                SharedPreferences pref = context.getSharedPreferences("User", Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = pref.edit();
+                editor.putString("lightType", "6");
+                editor.putString("switchType", "ON");
+                editor.apply();
+
+                Intent postState = new Intent(context.getApplicationContext(), POSTtoDoor.class);
+                context.getApplicationContext().startService(postState);
+                context.getApplicationContext().stopService(postState);
+
+            }
             for (int i = 0; i < commands.length; i++)
             {
                 if (command.contains(commands[i]))

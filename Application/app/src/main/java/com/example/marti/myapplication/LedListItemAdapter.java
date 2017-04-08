@@ -36,7 +36,7 @@ public class LedListItemAdapter extends ArrayAdapter<LedListItem>
             view = layoutInflater.inflate(layoutResource, null);
         }
 
-        LedListItem listItem = getItem(position);
+        final LedListItem listItem = getItem(position);
 
         if (listItem != null)
         {
@@ -63,7 +63,12 @@ public class LedListItemAdapter extends ArrayAdapter<LedListItem>
                             editor.putString("switchType", "OFF");
                         }
                         editor.apply();
-                        Intent postState = new Intent(getContext(), POSTtoMainServer.class);
+                        Intent postState = null;
+                        if(Integer.parseInt(listItem.id) < 4)
+                            postState = new Intent(getContext(), POSTtoMainServer.class);
+                        else
+                            postState = new Intent(getContext(), POSTtoDoor.class);
+
                         getContext().startService(postState);
                         getContext().stopService(postState);
                     }

@@ -12,6 +12,7 @@ import android.os.CountDownTimer;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -113,8 +114,15 @@ public class AlarmFragment extends Fragment {
             timers.add(new CountDownTimer(getSeconds()*1000,1000){
                 @Override
                 public void onTick(long millisUntilFinished) {
-                    alarms.get(index).setSecondsRemain(millisUntilFinished/1000);
-                    adapter.notifyDataSetChanged();
+                    try
+                    {
+                        alarms.get(index).setSecondsRemain(millisUntilFinished / 1000);
+                        adapter.notifyDataSetChanged();
+                    }
+                    catch (Exception ex)
+                    {
+                        Log.e("Alarm",ex.toString());
+                    }
                 }
 
                 @Override
