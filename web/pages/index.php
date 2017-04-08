@@ -9,7 +9,6 @@
 include './include/header.php';
 
 echo '<div class="container">';
-
     echo '<div class="card-panel" style="height:600px;">';
     include './include/house.php';
     echo '</div>';

@@ -6,6 +6,7 @@
  * Time: 14:30
  */
 include './config/db.php';
+error_reporting(0);
 //include './lang/en/global.php';
 $db = new mysqli($config['db']['host'], $config['db']['user'], $config['db']['pass'],$config['db']['database']);
 

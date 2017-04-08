@@ -41,5 +41,6 @@ switch($path[0]) {
     default:
         include './include/head.php';
         include './pages/'.$pathOrigin.".php";
+        echo '<script src="http://www.ersite.cz/domains/craftyhoparba.eu/js/materialize.js"></script>';
         break;
 }

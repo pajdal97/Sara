@@ -89,7 +89,7 @@ function reload_objects() {
     
     $.ajax({
         method: "GET",
-        url: "http://www.ersite.cz/sara/web/api/get",
+        url: "http://10.10.4.127:8080/api/get",
         data: { token:"easy_token", type:"light", find_by:"type", t: Date.now },
         success: function(data) {     
             lights = data;
@@ -110,7 +110,7 @@ function reload_doors() {
     
     $.ajax({
         method: "GET",
-        url: "http://www.ersite.cz/sara/web/api/get",
+        url: "http://10.10.4.127:8080/api/get",
         data: { token:"easy_token", type:"door", find_by:"type", t: Date.now },
         success: function(data) {     
             doors = data;
@@ -141,7 +141,7 @@ $(".light").click(function(){
     else light_set = "on";
     $.ajax({
         method: "GET",
-        url: "http://www.ersite.cz/sara/web/api/action",
+        url: "http://10.10.4.127:8080/api/action",
         data: { token:"easy_token", type:"light", status:light_set, find_by:"id", find_v:$(this).attr("obj_id"), t: Date.now },
         success: function(data) {     
 
@@ -155,7 +155,7 @@ $(".door").click(function(){
     else door_set = "open";
     $.ajax({
         method: "GET",
-        url: "http://www.ersite.cz/sara/web/api/action",
+        url: "http://10.10.4.127:8080/api/action",
         data: { token:"easy_token", type:"door", status:door_set, find_by:"id", find_v:$(this).attr("door_id"), t: Date.now },
         success: function(data) {     
 
@@ -177,7 +177,7 @@ if (annyang) {
         }
         $.ajax({
             method: "GET",
-            url: "http://www.ersite.cz/sara/web/api/action",
+            url: "http://10.10.4.127:8080/api/action",
             data: sendApi,
             success: function(data) {     
     

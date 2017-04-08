@@ -1,11 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="PublishConfigData" autoUpload="Always" serverName="Sara">
+  <component name="PublishConfigData" autoUpload="Always" serverName="Sara 2">
     <serverData>
       <paths name="Sara">
         <serverdata>
           <mappings>
-            <mapping deploy="/" local="$PROJECT_DIR$" web="/" />
+            <mapping deploy="/" local="$PROJECT_DIR$/web/" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
+      <paths name="Sara 2">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/" local="$PROJECT_DIR$/web" web="/" />
           </mappings>
         </serverdata>
       </paths>
