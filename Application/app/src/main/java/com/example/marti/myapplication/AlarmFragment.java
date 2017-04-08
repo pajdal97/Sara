@@ -45,7 +45,12 @@ public class AlarmFragment extends Fragment{
                 addAlarm();
             }
         });
+        v.findViewById(R.id.delete).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
+            }
+        });
         return v;
     }
 
@@ -103,7 +108,7 @@ public class AlarmFragment extends Fragment{
     }
 
     private class MyTimer{
-        public MyTimer(final int index){//30 000  1000
+        public MyTimer(final int index){
             timers.add(new CountDownTimer(getSeconds()*1000,1000){
                 @Override
                 public void onTick(long millisUntilFinished) {
