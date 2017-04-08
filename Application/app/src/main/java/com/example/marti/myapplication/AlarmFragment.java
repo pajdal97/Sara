@@ -115,7 +115,7 @@ public class AlarmFragment extends Fragment{
 
                 @Override
                 public void onFinish() {
-                    Intent serv=new Intent(getContext(),POSTtoMainServer.class);
+                    Intent serv = new Intent(getContext(),POSTtoMainServer.class);
                     SharedPreferences pref = getContext().getSharedPreferences("User", 0);
                     SharedPreferences.Editor editor = pref.edit();
                     editor.putString("switchType", "ON");
@@ -123,8 +123,6 @@ public class AlarmFragment extends Fragment{
                     editor.apply();
                     getContext().startService(serv);
                     getContext().stopService(serv);
-
-
                 }
             }.start());
         }
@@ -133,7 +131,12 @@ public class AlarmFragment extends Fragment{
     public int getSeconds(){
         int a = minutes*60 + hours*3600;//to seconds
         int b = minutesFinal*60 + hoursFinal*3600;//final to seconds
-        return (b - a);
+
+        if(a<b){
+            return (b-a);
+        }else{
+            return (3600*24*(dayFinal-day))-(a-b);
+        }
     }
 
     public void addZero(StringBuilder builder,int value){
@@ -141,9 +144,11 @@ public class AlarmFragment extends Fragment{
             builder.append("0");
         }
     }
+
     public String getDayStage(int hours){
         return hours>0 && hours<12? "AM":"PM";
     }
+
     public String getMonth(int month){
         switch(month){
             case 1: return "January";

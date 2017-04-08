@@ -53,9 +53,15 @@ public class FragmentActivity extends AppCompatActivity {
         // Set up the ViewPager with the sections adapter.
         mViewPager = (ViewPager) findViewById(R.id.container);
         mViewPager.setAdapter(mSectionsPagerAdapter);
-
+        mViewPager.setCurrentItem(1);
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(mViewPager);
+        int[] id = {R.drawable.led,
+                R.drawable.weather,
+                R.drawable.alarm};
+        for (int i = 0; i < tabLayout.getTabCount(); i++) {
+            tabLayout.getTabAt(i).setIcon(id[i]);
+        }
     }
 
     @Override
@@ -117,11 +123,11 @@ public class FragmentActivity extends AppCompatActivity {
         public CharSequence getPageTitle(int position) {
             switch (position) {
                 case 0:
-                    return  "Led";
+                    return  "";
                 case 1:
-                    return "Weather";
+                    return "";
                 case 2:
-                    return "Alarm";
+                    return "";
             }
             return null;
         }

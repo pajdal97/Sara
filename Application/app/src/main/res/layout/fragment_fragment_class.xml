@@ -1,10 +1,10 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:app="http://schemas.android.com/apk/res-auto"
-              xmlns:tools="http://schemas.android.com/tools"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:orientation="vertical"
-              tools:context="com.example.marti.myapplication.FragmentClass">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.example.marti.myapplication.FragmentClass">
 
 
     <LinearLayout
@@ -18,7 +18,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="2"
-            app:srcCompat="@mipmap/sunny" />
+            android:paddingLeft="10dp"
+            app:srcCompat="@drawable/weather" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -26,50 +27,31 @@
             android:layout_weight="1.5"
             android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/time"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="3"
-                android:ems="10"
-                android:gravity="center_vertical"
-                android:text="Time"
-                android:textSize="20sp" />
-
-            <TextView
-                android:id="@+id/datum"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="2"
-                android:ems="10"
-                android:gravity="center_vertical"
-                android:text="Datum"
-                android:textSize="20sp" />
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="3"
-                android:gravity="center"
-                android:orientation="horizontal">
+                android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/clouds"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="3"
-                    android:gravity="center_vertical"
+                    android:layout_weight="1.00"
                     android:text="Clouds"
-                    android:textSize="20sp" />
+                    android:gravity="center"
+                    android:textSize="20sp"
+                    android:textStyle="bold"/>
 
                 <TextView
                     android:id="@+id/tempeature"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="2"
-                    android:gravity="center_vertical"
+                    android:layout_weight="1"
+                    android:gravity="center"
                     android:text="8°C"
-                    android:textSize="20sp" />
+                    android:textSize="20sp"
+                    android:textStyle="bold"/>
             </LinearLayout>
 
         </LinearLayout>
@@ -92,43 +74,56 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="House status:"
-                android:textSize="30sp"/>
+                android:textSize="30sp"
+                android:textStyle="bold"
+                android:layout_marginLeft="10dp"/>
 
             <Button
                 android:id="@+id/button1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:background="#76ff03"
                 android:clickable="false"
-                android:text="Protected"/>
+                android:text="Protected"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/textView6"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="All lights: "
-                android:textSize="30sp"/>
+                android:textSize="30sp"
+                android:textStyle="bold"
+                android:layout_marginLeft="10dp"/>
 
             <TextView
-                android:textSize="25sp"
-                android:gravity="center"
                 android:id="@+id/button2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:clickable="false"
-                android:text="Turned off"/>
+                android:gravity="center"
+                android:text="Turned off"
+                android:textSize="25sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/textView7"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Door: "
-                android:textSize="30sp"/>
+                android:textSize="30sp"
+                android:textStyle="bold"
+                android:layout_marginLeft="10dp"/>
 
             <Button
                 android:id="@+id/button3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Open log"/>
+                android:layout_margin="10dp"
+                android:background="#c5cae9"
+                android:text="Open log"
+                android:textStyle="bold" />
 
         </LinearLayout>
     </LinearLayout>
