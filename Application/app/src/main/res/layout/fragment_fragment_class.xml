@@ -18,7 +18,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="2"
-            android:src="@mipmap/sunny"/>
+            android:src="@mipmap/cloud"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -92,39 +92,44 @@
                 android:id="@+id/button1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:clickable="false"
+                android:onClick="protect"
                 android:text="Protected"/>
 
-            <TextView
-                android:id="@+id/textView6"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="All lights: "
-                android:layout_marginLeft="10dp"
-                android:textSize="23dp"/>
 
-            <TextView
-                android:id="@+id/button2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:clickable="false"
-                android:gravity="center"
-                android:text="Turned off"
-                android:textSize="20dp"/>
 
-            <TextView
-                android:id="@+id/textView7"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:text="Door: "
-                android:textSize="23dp"/>
+            <!--
+                        <TextView
+                            android:id="@+id/textView6"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Lights: "
+                            android:layout_marginLeft="10dp"
+                            android:textSize="23dp"/>
 
-            <Button
-                android:id="@+id/button3"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Open log"/>
+                        <TextView
+                            android:id="@+id/lightsTV"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:clickable="false"
+                            android:gravity="center"
+                            android:text="Turned off"
+                            android:textSize="20dp"/>
+
+                        <TextView
+                            android:id="@+id/textView7"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:text="Door: "
+                            android:textSize="23dp"/>
+
+                        <Button
+                            android:id="@+id/button3"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Open log"/>
+
+                            -->
 
         </LinearLayout>
     </LinearLayout>

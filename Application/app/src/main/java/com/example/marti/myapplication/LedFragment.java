@@ -72,18 +72,14 @@ public class LedFragment extends Fragment {
             try
             {
                 if(states.get(i) == "OFF")
-                    adapter.add(new LedListItem(getContext().getApplicationContext(),"light", ids.get(i), false));
+                    adapter.add(new LedListItem(getContext().getApplicationContext(),"Light ", ids.get(i), false));
                 else
-                    adapter.add(new LedListItem(getContext().getApplicationContext(), "light", ids.get(i), true));
+                    adapter.add(new LedListItem(getContext().getApplicationContext(), "Light ", ids.get(i), true));
             }
             catch (Exception ex)
             {
                 Log.e("asd",ex.toString());
             }
         }
-
-
     }
-
-
 }

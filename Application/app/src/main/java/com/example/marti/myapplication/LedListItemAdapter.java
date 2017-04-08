@@ -66,8 +66,6 @@ public class LedListItemAdapter extends ArrayAdapter<LedListItem>
                         Intent postState = null;
                         if(Integer.parseInt(listItem.id) < 4)
                             postState = new Intent(getContext(), POSTtoMainServer.class);
-                        else
-                            postState = new Intent(getContext(), POSTtoDoor.class);
 
                         getContext().startService(postState);
                         getContext().stopService(postState);
