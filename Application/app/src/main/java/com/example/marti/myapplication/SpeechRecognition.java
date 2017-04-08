@@ -128,21 +128,21 @@ public class SpeechRecognition implements RecognitionListener
                         SharedPreferences pref = context.getSharedPreferences("User", Context.MODE_PRIVATE);
                         SharedPreferences.Editor editor = pref.edit();
                         editor.putString("lightType", "0");
-                        editor.putString("switchType", "ON");
+                        editor.putString("switchType", "OFF");
                         editor.apply();
                     } else if (command.contains("second"))
                     {
                         SharedPreferences pref = context.getSharedPreferences("User", Context.MODE_PRIVATE);
                         SharedPreferences.Editor editor = pref.edit();
                         editor.putString("lightType", "1");
-                        editor.putString("switchType", "ON");
+                        editor.putString("switchType", "OFF");
                         editor.apply();
                     } else if (command.contains("third"))
                     {
                         SharedPreferences pref = context.getSharedPreferences("User", Context.MODE_PRIVATE);
                         SharedPreferences.Editor editor = pref.edit();
                         editor.putString("lightType", "2");
-                        editor.putString("switchType", "ON");
+                        editor.putString("switchType", "OFF");
                         editor.apply();
                     }
                 }
