@@ -96,6 +96,7 @@
                 android:text="Protected"/>
 
 //1
+            //2
             <TextView
                 android:id="@+id/button2"
                 android:layout_width="wrap_content"
