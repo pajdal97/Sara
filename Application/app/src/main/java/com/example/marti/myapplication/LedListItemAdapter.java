@@ -1,10 +1,13 @@
 package com.example.marti.myapplication;
 
 import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.CompoundButton;
 import android.widget.Switch;
 import android.widget.TextView;
 
@@ -39,26 +42,6 @@ public class LedListItemAdapter extends ArrayAdapter<LedListItem>
             TextView ledTV = (TextView) view.findViewById(R.id.ledTV);
             ledTV.setText("Light " + listItem.id);
             Switch sw = (Switch) view.findViewById(R.id.ledSwitch);
-            ArrayList<String> arrayList = GETfromMainServer.getOnOffStates();
-
-            if (Objects.equals(arrayList.get(position), "ON "))
-            {
-                sw.setChecked(true);
-            } else
-            {
-                sw.setChecked(false);
-            }
-
-            /*
-            Toast.makeText(getContext(),arrayList.toString(),Toast.LENGTH_LONG).show();
-            for(int i=0;i<arrayList.size();i++){
-                if (Objects.equals(arrayList.get(i), "ON ")){
-                    sw.setChecked(true);
-                }
-                else {
-                    sw.setChecked(false);
-                }
-            }
             sw.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                     SharedPreferences pref = getContext().getSharedPreferences("User", 0);
@@ -74,9 +57,19 @@ public class LedListItemAdapter extends ArrayAdapter<LedListItem>
                     Intent postState = new Intent(getContext(), POSTtoMainServer.class);
                     getContext().startService(postState);
                     getContext().stopService(postState);
-                }F
+                }
             });
-            */
+            ArrayList<String> arrayList = GETfromMainServer.getOnOffStates();
+
+            if (Objects.equals(arrayList.get(position), "ON "))
+            {
+                sw.setChecked(true);
+            } else
+            {
+                sw.setChecked(false);
+            }
+
+
         }
 
         return view;
