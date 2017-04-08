@@ -93,9 +93,9 @@ public class AlarmFragment extends Fragment {
                         addZero(hm,minutesFinal);
                         hm.append(""+minutesFinal+" "+getDayStage(hoursFinal));
                         if(getSeconds()>0 && day<=dayFinal && month<=monthFinal && year<= yearFinal){
+                            new MyTimer(alarms.size()-1);
                             alarms.add(new Texts(ym.toString(),hm.toString(),getSeconds()));
                             adapter.notifyDataSetChanged();
-                            new MyTimer(alarms.size()-1);
                         }else{
                             Toast.makeText(getActivity(),"Not a validate datum",Toast.LENGTH_SHORT).show();
                         }
@@ -109,13 +109,16 @@ public class AlarmFragment extends Fragment {
 
     private class MyTimer {
         public MyTimer(final int index){
-            timers.add(new CountDownTimer(getSeconds()*1000,1000){
+
+            new CountDownTimer(getSeconds()*1000,1000){
                 @Override
                 public void onTick(long millisUntilFinished) {
                     try
                     {
                         alarms.get(index).setSecondsRemain(millisUntilFinished / 1000);
-                        adapter.notifyDataSetChanged();
+                        if(adapter != null) {
+                            adapter.notifyDataSetChanged();
+                        }
                     }
                     catch (Exception ex)
                     {
@@ -211,7 +214,7 @@ public class AlarmFragment extends Fragment {
                 TextView time_remain = (TextView) view.findViewById(R.id.seconds_remaining);
                 ym_time.setText(alarms.get(position).getYm());
                 hm_time.setText(alarms.get(position).getHm());
-                time_remain.setText("(remaining " + (int) alarms.get(position).getSecondsRemain() + " s)");
+                time_remain.setText("(remaining " + (int) alarms.get(position).getSecondsRemain() + "s)");
 
                 ImageButton deleteButton = (ImageButton) view.findViewById(R.id.delete);
 
