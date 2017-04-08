@@ -47,7 +47,7 @@ echo '<style>
     border-bottom: 3px solid black;
     transition:all .3s;
 }
-.door[door="open"] {
+.door[door="on"] {
     background: rgba(0,0,0,0.29);
 }
 .door > .door_id {
@@ -59,7 +59,7 @@ echo '<style>
     background:#282828;
     transition:all .3s;
 }
-.door[door="open"] > .door_id {
+.door[door="on"] > .door_id {
     background:rgba(40,40,40,0.5);
     top:-67px;
 }
@@ -77,9 +77,10 @@ echo '<div id="house" style="position:relative;height:100px;">';
         echo '<div class="room" room_id="'.$room['id'].'" name="'.$room['name'].'" '.$attr_object.' style="background:'.$room['color'].';top:'.$room['top'].'px;left:'.$room['left'].'px;width:'.$room['width'].'px;height:'.$room['height'].'px;"></div>';
     }
 
-    echo '<div class="door" door_id="3" style="top:150px;"><div class="door_id"></div></div>';
-    echo '<div class="door" door_id="5" style="top:320px;"><div class="door_id"></div></div>';
-    echo '<div class="door" door_id="4" style="top:300px;left:505px;"><div class="door_id"></div></div>';
+    echo '<div class="door" door_id="6" style="top:150px;"><div class="door_id"></div></div>';
+    echo '<div class="door" door_id="7" style="top:320px;"><div class="door_id"></div></div>';
+    echo '<div class="door" door_id="8" style="top:300px;left:505px;"><div class="door_id"></div></div>';
+    echo '<div class="door" door_id="9" style="top:300px;left:900px;"><div class="door_id"></div></div>';
 
 echo '<script>
 var lights = [];
@@ -147,12 +148,20 @@ $(".light").click(function(){
 
         }
     });
+    $.ajax({
+        method: "GET",
+        url: "http://192.168.1.238:5000/api/action",
+        data: { id:$(this).attr("obj_id"), state:light_set ,t: Date.now },
+        success: function(data) {     
+
+        }
+    });
 });
 
-var light_set;
+var door_set;
 $(".door").click(function(){
-    if($(this).attr("door") == "open") door_set = "close";
-    else door_set = "open";
+    if($(this).attr("door") == "on") door_set = "off";
+    else door_set = "on";
     $.ajax({
         method: "GET",
         url: "http://10.10.4.127:8080/api/action",
@@ -161,44 +170,19 @@ $(".door").click(function(){
 
         }
     });
-});
+    $.ajax({
+        method: "GET",
+        url: "http://192.168.1.238:5000/api/action",
+        data: { id:$(this).attr("obj_id"), state:light_set ,t: Date.now },
+        success: function(data) {     
 
-
-});
-var sendApi;
-if (annyang) {
-  var commands = {
-    "*text": function(text) {
-        textArr = text.split(" ");
-        switch(textArr[0]) {
-           case "light":
-               sendApi = { token:"easy_token", type:"light", status:textArr[1], find_by:"type", t: Date.now };
-               break;
         }
-        $.ajax({
-            method: "GET",
-            url: "http://10.10.4.127:8080/api/action",
-            data: sendApi,
-            success: function(data) {     
+    });
     
-            }
-        });
-    }
-  };
-  annyang.addCallback("resultNoMatch", function(userSaid, commandText, phrases) {
-  console.log(userSaid); 
-  console.log(commandText); 
-  console.log(phrases); 
 });
-  annyang.addCallback("soundstart", function(userSaid, commandText, phrases) {
-    annyang.resume();
-  });
 
-  
-  annyang.setLanguage("en-US");
-  annyang.addCommands(commands);
-  annyang.start();
-}
+
+});
 </script>';
 
 echo '</div>';

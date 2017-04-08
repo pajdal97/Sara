@@ -9,7 +9,7 @@
 switch($_GET['type']) {
 
     case "door":
-        $listValues = array("open","close","middle");
+        $listValues = array("open","off","middle");
         break;
 
     case "light":

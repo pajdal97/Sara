@@ -21,9 +21,9 @@ switch($path[0]) {
             $token = $db->query("SELECT * FROM users WHERE token='".$_GET['token']."' LIMIT 1")->fetch_assoc();
             if($token['id'] > 0) {
                 $result['status'] = "success"; // Default success
-
                 if ($path[1] == true) {
-                    include './api/' . $path[1] . '.php';
+
+                    include './api/'.$path[1].'.php';
                 } else {
                     $result['error_type'] = "wrong_action";
                 }
@@ -35,7 +35,7 @@ switch($path[0]) {
         }
 
         if (count($result['error_message']) > 0) $result['status'] = "error"; // If error message
-        echo json_encode($result); // Print all result
+        echo json_encode($result,JSON_PRETTY_PRINT); // Print all result
 
         break;
     default:
