@@ -17,7 +17,6 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
-
 import java.util.ArrayList;
 
 
@@ -40,17 +39,11 @@ public class AlarmFragment extends Fragment{
         adapter = new AlarmAdapter(getActivity(),alarms);
         alarmList.setAdapter(adapter);
 
+
         v.findViewById(R.id.add_alarm).setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
                 addAlarm();
-            }
-        });
-
-        v.findViewById(R.id.delete).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v){
-
             }
         });
         return v;
@@ -184,20 +177,35 @@ public class AlarmFragment extends Fragment{
         }
 
         @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
-            View view = LayoutInflater.from(context).inflate(R.layout.alarm_layout,null);
-            TextView ym_time = (TextView) view.findViewById(R.id.year_month);
-            TextView hm_time = (TextView) view.findViewById(R.id.hour_minute);
-            TextView time_remain = (TextView) view.findViewById(R.id.seconds_remaining);
-            ym_time.setText(alarms.get(position).getYm());
-            hm_time.setText(alarms.get(position).getHm());
-            time_remain.setText("(remaining "+(int) alarms.get(position).getSecondsRemain()+" s)");
-            ImageButton deleteButton = (ImageButton) view.findViewById(R.id.delete);
-            deleteButton.setTag(position);
+        public View getView(final int position, View convertView, ViewGroup parent) {
+            View view = LayoutInflater.from(context).inflate(R.layout.alarm_layout, null);
+            try {
+                TextView ym_time = (TextView) view.findViewById(R.id.year_month);
+                TextView hm_time = (TextView) view.findViewById(R.id.hour_minute);
+                TextView time_remain = (TextView) view.findViewById(R.id.seconds_remaining);
+                ym_time.setText(alarms.get(position).getYm());
+                hm_time.setText(alarms.get(position).getHm());
+                time_remain.setText("(remaining " + (int) alarms.get(position).getSecondsRemain() + " s)");
+
+                ImageButton deleteButton = (ImageButton) view.findViewById(R.id.delete);
+
+                deleteButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        try {
+                            alarms.remove(position);
+                            timers.get(position).cancel();
+                            timers.remove(position);
+                            adapter.notifyDataSetChanged();
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                });
+            }catch(Exception e){
+                e.printStackTrace();
+            }
             return view;
         }
-    }
-    public void deleteItem(){
-
     }
 }
