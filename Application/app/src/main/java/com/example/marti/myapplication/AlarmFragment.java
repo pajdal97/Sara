@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.DatePicker;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.TimePicker;
@@ -45,9 +46,10 @@ public class AlarmFragment extends Fragment{
                 addAlarm();
             }
         });
+
         v.findViewById(R.id.delete).setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View v){
 
             }
         });
@@ -190,7 +192,12 @@ public class AlarmFragment extends Fragment{
             ym_time.setText(alarms.get(position).getYm());
             hm_time.setText(alarms.get(position).getHm());
             time_remain.setText("(remaining "+(int) alarms.get(position).getSecondsRemain()+" s)");
+            ImageButton deleteButton = (ImageButton) view.findViewById(R.id.delete);
+            deleteButton.setTag(position);
             return view;
         }
+    }
+    public void deleteItem(){
+
     }
 }
