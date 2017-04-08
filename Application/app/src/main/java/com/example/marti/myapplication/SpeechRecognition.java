@@ -89,8 +89,7 @@ public class SpeechRecognition implements RecognitionListener
                         Toast.makeText(context.getApplicationContext(),command,Toast.LENGTH_SHORT);
                         System.out.println("COMMAND");
 
-                        if(command.contains("light off"))
-                        {
+
                             if(command.contains("first"))
                             {
                                 SharedPreferences pref = context.getSharedPreferences("User", Context.MODE_PRIVATE);
@@ -117,9 +116,7 @@ public class SpeechRecognition implements RecognitionListener
                             }
 
                             //request for light
-                        }
-                        else if(command.contains("light on"))
-                        {
+
                             if(command.contains("first"))
                             {
                                 SharedPreferences pref = context.getSharedPreferences("User", Context.MODE_PRIVATE);
@@ -151,8 +148,6 @@ public class SpeechRecognition implements RecognitionListener
 
                             //request for light
                         }
-
-                    }
             }
         }
 
