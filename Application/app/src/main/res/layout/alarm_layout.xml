@@ -1,14 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginLeft="10dp"
-        android:layout_gravity="right">
 
         <TextView
             android:id="@+id/year_month"
@@ -16,7 +9,9 @@
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
             android:text="March 2017"
-            android:textSize="18dp"/>
+            android:layout_marginLeft="30dp"
+            android:textColor="@color/black"
+            android:textSize="16dp" />
         <TextView
             android:layout_gravity="center"
             android:layout_width="wrap_content"
@@ -24,22 +19,28 @@
             android:id="@+id/seconds_remaining"
             android:textSize="16dp"
             android:text="aodsdsadlso"
+            android:layout_centerHorizontal="true"
             android:layout_marginLeft="10dp"/>
-        <ImageButton
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:src="@drawable/delete_icon"
-            android:layout_marginRight="10dp"
-            android:layout_gravity="end"
-            android:id="@+id/delete"/>
-        </LinearLayout>
 
     <TextView
         android:id="@+id/hour_minute"
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
-        android:textSize="15dp"
+        android:textSize="13dp"
         android:text="20:32 AM"
-        android:layout_marginLeft="10dp"/>
+        android:layout_below="@id/year_month"
+        android:textColor="@color/black"
+        android:layout_marginLeft="30dp"/>
 
-</LinearLayout>
+    <ImageButton
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:src="@drawable/delete_icon"
+        android:background="@color/colorPrimary"
+        android:layout_marginRight="10dp"
+        android:layout_gravity="end"
+        android:id="@+id/delete"
+        android:layout_alignBottom="@+id/hour_minute"
+        android:layout_alignParentEnd="true" />
+
+</RelativeLayout>

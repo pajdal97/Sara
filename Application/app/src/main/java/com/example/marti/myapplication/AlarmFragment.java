@@ -91,7 +91,6 @@ public class AlarmFragment extends Fragment {
                         addZero(hm,hoursFinal);
                         hm.append(""+hoursFinal+":");
                         addZero(hm,minutesFinal);
-
                         hm.append(""+minutesFinal+" "+getDayStage(hoursFinal));
                         if(getSeconds()>0 && day<=dayFinal && month<=monthFinal && year<= yearFinal){
                             alarms.add(new Texts(ym.toString(),hm.toString(),getSeconds()));
@@ -108,8 +107,7 @@ public class AlarmFragment extends Fragment {
         datePickerDialog.show();
     }
 
-    private class MyTimer extends Service {
-
+    private class MyTimer {
         public MyTimer(final int index){
             timers.add(new CountDownTimer(getSeconds()*1000,1000){
                 @Override
@@ -137,12 +135,6 @@ public class AlarmFragment extends Fragment {
                     getContext().stopService(serv);
                 }
             }.start());
-        }
-
-        @Nullable
-        @Override
-        public IBinder onBind(Intent intent) {
-            return null;
         }
     }
 
