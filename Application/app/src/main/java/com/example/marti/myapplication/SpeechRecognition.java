@@ -145,9 +145,10 @@ public class SpeechRecognition implements RecognitionListener
                                 editor.apply();
                             }
 
-                        Intent postState = new Intent(context.getApplicationContext(), POSTtoMainServer.class);
-                        context.getApplicationContext().startService(postState);
-                        context.getApplicationContext().stopService(postState);
+                            Intent postState = new Intent(context.getApplicationContext(), POSTtoMainServer.class);
+                            context.getApplicationContext().startService(postState);
+                            context.getApplicationContext().stopService(postState);
+
                             //request for light
                         }
 

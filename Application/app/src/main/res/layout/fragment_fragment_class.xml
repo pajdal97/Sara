@@ -18,7 +18,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="2"
-            app:srcCompat="@mipmap/sunny" />
+            app:srcCompat="@mipmap/sunny"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -27,50 +27,43 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/time"
+                android:id="@+id/dateTV"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="3"
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="8dp"
                 android:ems="10"
-                android:gravity="center_vertical"
-                android:text="Time"
-                android:textSize="20sp" />
+                android:text="8.4.2017"
+                android:textSize="20sp"/>
+
 
             <TextView
-                android:id="@+id/datum"
-                android:layout_width="match_parent"
+                android:id="@+id/timeTV"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="2"
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="8dp"
                 android:ems="10"
-                android:gravity="center_vertical"
-                android:text="Datum"
-                android:textSize="20sp" />
+                android:text="Time"
+                android:textSize="20sp"/>
 
-            <LinearLayout
+            <TextView
+                android:id="@+id/clouds"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="3"
-                android:gravity="center"
-                android:orientation="horizontal">
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="8dp"
+                android:text="Clouds"
+                android:textSize="20sp"/>
 
-                <TextView
-                    android:id="@+id/clouds"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_weight="3"
-                    android:gravity="center_vertical"
-                    android:text="Clouds"
-                    android:textSize="20sp" />
-
-                <TextView
-                    android:id="@+id/tempeature"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_weight="2"
-                    android:gravity="center_vertical"
-                    android:text="8°C"
-                    android:textSize="20sp" />
-            </LinearLayout>
+            <TextView
+                android:id="@+id/tempeatureTV"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="8dp"
+                android:text="8°C"
+                android:textSize="20sp"/>
 
         </LinearLayout>
 
@@ -109,13 +102,13 @@
                 android:textSize="30sp"/>
 
             <TextView
-                android:textSize="25sp"
-                android:gravity="center"
                 android:id="@+id/button2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:clickable="false"
-                android:text="Turned off"/>
+                android:gravity="center"
+                android:text="Turned off"
+                android:textSize="25sp"/>
 
             <TextView
                 android:id="@+id/textView7"
