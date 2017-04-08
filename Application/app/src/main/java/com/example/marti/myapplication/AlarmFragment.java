@@ -3,6 +3,8 @@ package com.example.marti.myapplication;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.icu.util.Calendar;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -113,7 +115,16 @@ public class AlarmFragment extends Fragment{
 
                 @Override
                 public void onFinish() {
-                    //send request to server lmao
+                    Intent serv=new Intent(getContext(),POSTtoMainServer.class);
+                    SharedPreferences pref = getContext().getSharedPreferences("User", 0);
+                    SharedPreferences.Editor editor = pref.edit();
+                    editor.putString("switchType", "ON");
+                    editor.putString("lightType", "0");
+                    editor.apply();
+                    getContext().startService(serv);
+                    getContext().stopService(serv);
+
+
                 }
             }.start());
         }
