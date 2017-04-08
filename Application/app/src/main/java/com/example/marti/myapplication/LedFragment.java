@@ -82,11 +82,6 @@ public class LedFragment extends Fragment {
             }
         }
 
-        for(int i = 3; i < 7; i++)
-        {
-            adapter.add(new LedListItem(getContext().getApplicationContext(),"door",String.valueOf(i),true));
-        }
-
 
     }
 

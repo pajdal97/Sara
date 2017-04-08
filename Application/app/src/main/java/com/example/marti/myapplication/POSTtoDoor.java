@@ -23,7 +23,7 @@ public class POSTtoDoor extends Service {
 
     public int onStartCommand(Intent intent, int flags, int startId) {
         RequestQueue queue = Volley.newRequestQueue(this);
-        String url = "http://192.168.1.238:5000/doors/API";
+        String url = "http://192.168.1.238:5000/door/api";
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
                 new Response.Listener<String>() {
                     @Override
@@ -37,8 +37,10 @@ public class POSTtoDoor extends Service {
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<>();
                 SharedPreferences pref = getApplicationContext().getSharedPreferences("User", MODE_PRIVATE);
-                params.put("state", pref.getString("switchType", "ON"));
-                params.put("id", pref.getString("doorType", "0"));
+                String state = pref.getString("switchType", "OFF");
+                params.put("state", state);
+                String a = pref.getString("lightType", "0");
+                params.put("id", String.valueOf(Integer.parseInt(a)+1));
                 return params;
             }
         };

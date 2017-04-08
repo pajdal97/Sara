@@ -28,9 +28,15 @@
             android:enabled="true"
             android:exported="true" />
 
+        <service
+            android:name=".POSTtoDoor"
+            android:enabled="true"
+            android:exported="true" />
+
         <activity
             android:name=".FragmentActivity"
             android:label="SARA"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
 
             <intent-filter>
