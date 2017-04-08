@@ -3,6 +3,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.example.marti.myapplication.Main2Activity">
     <item
+        android:id="@+id/speechMenuItem"
+        android:title="Speech"
+        app:showAsAction="always"
+        android:icon="@mipmap/speech"/>
+
+
+    <item
         android:id="@+id/action_settings"
         android:orderInCategory="100"
         android:title="@string/action_settings"

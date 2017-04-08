@@ -14,11 +14,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
 
         <service
@@ -29,6 +25,7 @@
             android:name=".GETweather"
             android:enabled="true"
             android:exported="true" />
+
         <service
             android:name=".POSTtoMainServer"
             android:enabled="true"
@@ -36,8 +33,16 @@
 
         <activity
             android:name=".FragmentActivity"
-            android:label="@string/title_activity_fragment_manager"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:label="@string/title_activity_tabbed"
+            android:theme="@style/AppTheme.NoActionBar">
+
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+        </activity>
     </application>
 
 </manifest>

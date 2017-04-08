@@ -9,6 +9,7 @@ import android.preference.PreferenceManager;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -84,6 +85,21 @@ public class MainActivity extends AppCompatActivity {
                 turn_on("0", "ON");
             }
         });
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
+        int id = item.getItemId();
+
+        if(id == R.id.speechMenuItem)
+        {
+            SpeechRecognition speechRecognition = new SpeechRecognition();
+            speechRecognition.context = getApplicationContext();
+            speechRecognition.startListen();
+        }
+
+        return false;
     }
 
     private void saveLightsState(HashMap<String, ArrayList<String>> lights) {

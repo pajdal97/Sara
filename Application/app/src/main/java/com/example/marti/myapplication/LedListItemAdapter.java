@@ -64,7 +64,8 @@ public class LedListItemAdapter extends ArrayAdapter<LedListItem>
             if (Objects.equals(arrayList.get(position), "ON "))
             {
                 sw.setChecked(true);
-            } else
+            }
+            else
             {
                 sw.setChecked(false);
             }

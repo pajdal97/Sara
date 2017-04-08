@@ -37,8 +37,8 @@ public class POSTtoMainServer extends Service {
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<>();
                 SharedPreferences pref = getApplicationContext().getSharedPreferences("User", MODE_PRIVATE);
-                params.put("id", pref.getString("lightType", "0"));
                 params.put("state", pref.getString("switchType", "ON"));
+                params.put("id", pref.getString("lightType", "0"));
                 return params;
             }
         };

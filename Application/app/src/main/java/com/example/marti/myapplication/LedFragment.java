@@ -40,14 +40,14 @@ public class LedFragment extends Fragment {
 
             public void onFinish()
             {
-                   saveLightsState(lights);
                 try
                 {
                     ledsLV.setAdapter(adapter);
+                    saveLightsState(lights);
                 }
                 catch (Exception ex)
                 {
-                    Log.e("FUCK",ex.toString());
+                    Log.e("onFinniah",ex.toString());
                 }
             }
         };

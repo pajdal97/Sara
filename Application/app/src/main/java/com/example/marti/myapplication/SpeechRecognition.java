@@ -2,6 +2,7 @@ package com.example.marti.myapplication;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.speech.RecognitionListener;
 import android.speech.RecognizerIntent;
@@ -45,10 +46,7 @@ public class SpeechRecognition implements RecognitionListener
     @Override
     public void onError(int arg0)
     {
-        if(arg0 == 7)
-            startListen();
-        else
-            Log.e("SpeechError", String.valueOf(arg0));
+        Log.e("SpeechError", String.valueOf(arg0));
 
     }
 
@@ -81,8 +79,6 @@ public class SpeechRecognition implements RecognitionListener
         for (String command : results.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION) )
         {
             command = command.toLowerCase();
-            if (command.contains("sara"))
-            {
                 Log.i("SARA",command);
                 command = command.replace(" sara ", "");
                 for (int i = 0; i < commands.length; i++)
@@ -93,17 +89,69 @@ public class SpeechRecognition implements RecognitionListener
                         Toast.makeText(context.getApplicationContext(),command,Toast.LENGTH_SHORT);
                         System.out.println("COMMAND");
 
-                        if(command.contains("light"))
+                        if(command.contains("light off"))
                         {
+                            if(command.contains("first"))
+                            {
+                                SharedPreferences pref = context.getSharedPreferences("User", Context.MODE_PRIVATE);
+                                SharedPreferences.Editor editor = pref.edit();
+                                editor.putString("lightType", "0");
+                                editor.putString("switchType", "OFF");
+                                editor.apply();
+                            }
+                            else if(command.contains("second"))
+                            {
+                                SharedPreferences pref = context.getSharedPreferences("User", Context.MODE_PRIVATE);
+                                SharedPreferences.Editor editor = pref.edit();
+                                editor.putString("lightType", "1");
+                                editor.putString("switchType", "OFF");
+                                editor.apply();
+                            }
+                            else if(command.contains("third"))
+                            {
+                            SharedPreferences pref = context.getSharedPreferences("User", Context.MODE_PRIVATE);
+                            SharedPreferences.Editor editor = pref.edit();
+                            editor.putString("lightType", "2");
+                            editor.putString("switchType", "OFF");
+                            editor.apply();
+                            }
+
                             //request for light
                         }
-                        else if (command.contains("alarm"))
+                        else if(command.contains("light on"))
                         {
-                            //request for alarm
+                            if(command.contains("first"))
+                            {
+                                SharedPreferences pref = context.getSharedPreferences("User", Context.MODE_PRIVATE);
+                                SharedPreferences.Editor editor = pref.edit();
+                                editor.putString("lightType", "0");
+                                editor.putString("switchType", "ON");
+                                editor.apply();
+                            }
+                            else if(command.contains("second"))
+                            {
+                                SharedPreferences pref = context.getSharedPreferences("User", Context.MODE_PRIVATE);
+                                SharedPreferences.Editor editor = pref.edit();
+                                editor.putString("lightType", "1");
+                                editor.putString("switchType", "ON");
+                                editor.apply();
+                            }
+                            else if(command.contains("third"))
+                            {
+                                SharedPreferences pref = context.getSharedPreferences("User", Context.MODE_PRIVATE);
+                                SharedPreferences.Editor editor = pref.edit();
+                                editor.putString("lightType", "2");
+                                editor.putString("switchType", "ON");
+                                editor.apply();
+                            }
+
+                        Intent postState = new Intent(context.getApplicationContext(), POSTtoMainServer.class);
+                        context.getApplicationContext().startService(postState);
+                        context.getApplicationContext().stopService(postState);
+                            //request for light
                         }
 
                     }
-                }
             }
         }
 
