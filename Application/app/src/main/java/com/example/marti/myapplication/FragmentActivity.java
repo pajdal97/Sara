@@ -3,6 +3,7 @@ package com.example.marti.myapplication;
 import android.Manifest;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.preference.PreferenceManager;
 import android.support.design.widget.TabLayout;
 import android.support.design.widget.FloatingActionButton;
@@ -95,6 +96,21 @@ public class FragmentActivity extends AppCompatActivity {
         else LedFragment.adapter.getItem(index).state = false;
 
 
+    }
+
+    private boolean isProtected = false;
+    public void protect(View view)
+    {
+        if (isProtected)
+        {
+            view.setBackgroundResource(0);
+            isProtected = false;
+        }
+        else
+        {
+            view.setBackgroundResource(R.color.colorAccent);
+            isProtected = true;
+        }
     }
 
     @Override
