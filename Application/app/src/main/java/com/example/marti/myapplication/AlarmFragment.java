@@ -1,6 +1,7 @@
 package com.example.marti.myapplication;
 
 import android.app.DatePickerDialog;
+import android.app.Service;
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -8,6 +9,8 @@ import android.content.SharedPreferences;
 import android.icu.util.Calendar;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.os.IBinder;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,7 +25,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 
-public class AlarmFragment extends Fragment{
+public class AlarmFragment extends Fragment {
 
     public ListView alarmList;
     public ArrayList<Texts> alarms;
@@ -104,7 +107,8 @@ public class AlarmFragment extends Fragment{
         datePickerDialog.show();
     }
 
-    private class MyTimer{
+    private class MyTimer extends Service {
+
         public MyTimer(final int index){
             timers.add(new CountDownTimer(getSeconds()*1000,1000){
                 @Override
@@ -125,6 +129,12 @@ public class AlarmFragment extends Fragment{
                     getContext().stopService(serv);
                 }
             }.start());
+        }
+
+        @Nullable
+        @Override
+        public IBinder onBind(Intent intent) {
+            return null;
         }
     }
 

@@ -12,11 +12,13 @@
 
         <TextView
             android:id="@+id/year_month"
+            android:layout_gravity="center"
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
             android:text="March 2017"
             android:textSize="18dp"/>
         <TextView
+            android:layout_gravity="center"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/seconds_remaining"
@@ -27,7 +29,8 @@
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
             android:src="@drawable/delete_icon"
-            android:layout_marginLeft="50dp"
+            android:layout_marginRight="10dp"
+            android:layout_gravity="end"
             android:id="@+id/delete"/>
         </LinearLayout>
 
