@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-                CountDownTimer timer = new CountDownTimer(3000, 1000) {
+                CountDownTimer timer = new CountDownTimer(1000, 1000) {
                     public void onTick(long millisUntilFinished) {
                     }
 

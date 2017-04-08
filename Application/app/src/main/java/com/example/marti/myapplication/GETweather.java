@@ -17,14 +17,10 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-
 public class GETweather extends Service {
     public GETweather() {
     }
 
-    public static HashMap<String, ArrayList<String>> data;
 
 
     public int onStartCommand(Intent intent, int flags, int startId) {
@@ -38,9 +34,10 @@ public class GETweather extends Service {
                             JSONArray jsonArray = weatherInfo.getJSONArray("weather");
 
                             JSONObject js = jsonArray.getJSONObject(0);
-
                             SharedPreferences pref = getApplicationContext().getSharedPreferences("User", MODE_PRIVATE);
                             SharedPreferences.Editor editor = pref.edit();
+                            editor.putString("pocasi",js.getString("main"));
+                            editor.putString("teplota",weatherInfo.getJSONObject("main").getString("temp"));
 
                             editor.apply();
                         } catch (JSONException e) {
@@ -63,7 +60,4 @@ public class GETweather extends Service {
         throw new UnsupportedOperationException("Not yet implemented");
     }
 
-    static HashMap<String, ArrayList<String>> getWeatherData() {
-        return data;
-    }
 }

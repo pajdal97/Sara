@@ -34,7 +34,7 @@ public class LedFragment extends Fragment {
         ArrayList<String> states = GETfromMainServer.getOnOffStates();
 
 
-        CountDownTimer timer = new CountDownTimer(1000, 1000) {
+        CountDownTimer timer = new CountDownTimer(3000, 1000) {
             public void onTick(long millisUntilFinished) {
             }
 
