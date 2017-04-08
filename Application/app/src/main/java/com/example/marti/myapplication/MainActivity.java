@@ -106,8 +106,7 @@ public class MainActivity extends AppCompatActivity {
         editor.putString("lightType", id);
         editor.putString("switchType", state);
         editor.apply();
-        startService(postState);
-        stopService(postState);
+
     }
 
 
