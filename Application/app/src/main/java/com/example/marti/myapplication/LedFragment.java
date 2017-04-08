@@ -10,6 +10,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+import android.widget.Switch;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -19,7 +21,7 @@ public class LedFragment extends Fragment {
 
     private ListView ledsLV;
     private SharedPreferences preferences;
-    private LedListItemAdapter adapter;
+    public static LedListItemAdapter adapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
@@ -70,15 +72,21 @@ public class LedFragment extends Fragment {
             try
             {
                 if(states.get(i) == "OFF")
-                    adapter.add(new LedListItem(getContext().getApplicationContext(), ids.get(i), false));
+                    adapter.add(new LedListItem(getContext().getApplicationContext(),"light", ids.get(i), false));
                 else
-                    adapter.add(new LedListItem(getContext().getApplicationContext(), ids.get(i), true));
+                    adapter.add(new LedListItem(getContext().getApplicationContext(), "light", ids.get(i), true));
             }
             catch (Exception ex)
             {
                 Log.e("asd",ex.toString());
             }
         }
+
+        for(int i = 3; i < 7; i++)
+        {
+            adapter.add(new LedListItem(getContext().getApplicationContext(),"door",String.valueOf(i),true));
+        }
+
 
     }
 

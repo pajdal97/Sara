@@ -30,7 +30,7 @@
 
         <activity
             android:name=".FragmentActivity"
-            android:label="@string/title_activity_tabbed"
+            android:label="SARA"
             android:theme="@style/AppTheme.NoActionBar">
 
             <intent-filter>

@@ -13,11 +13,13 @@ import java.util.Calendar;
 
 public class LedListItem
 {
+    public String title;
     public String id;
     public boolean state;
 
-    public LedListItem(Context context, String id, boolean state)
+    public LedListItem(Context context, String title , String id, boolean state)
     {
+        this.title = title;
         this.id = id;
         this.state = state;
     }

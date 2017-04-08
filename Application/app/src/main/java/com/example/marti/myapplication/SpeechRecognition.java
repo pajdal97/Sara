@@ -13,6 +13,7 @@ import android.widget.Toast;
 public class SpeechRecognition implements RecognitionListener
 {
     Context context;
+
     public void startListen()
     {
         SpeechRecognizer speechRecognizer = SpeechRecognizer.createSpeechRecognizer(context.getApplicationContext());
@@ -72,82 +73,79 @@ public class SpeechRecognition implements RecognitionListener
     public void onResults(android.os.Bundle results)
     {
         String fResult = results.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION).get(0).toLowerCase();
-        String[] commands = new String[] { "turn on", "turn off", "light on", "light off", "switch on", "switch off" };
+        String[] commands = new String[]{"turn on", "turn off", "light on", "light off", "switch on", "switch off"};
 
         System.out.println("OnResult");
 
-        for (String command : results.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION) )
+        for (String command : results.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION))
         {
             command = command.toLowerCase();
-                Log.i("SARA",command);
-                command = command.replace(" sara ", "");
-                for (int i = 0; i < commands.length; i++)
+            Log.i("SARA", command);
+            command = command.replace(" sara ", "");
+            for (int i = 0; i < commands.length; i++)
+            {
+                if (command.contains(commands[i]))
                 {
-                    if (command.contains(commands[i]))
-                    {
-                        command.replace(commands[i],"");
-                        Toast.makeText(context.getApplicationContext(),command,Toast.LENGTH_SHORT);
-                        System.out.println("COMMAND");
-
-
-                            if(command.contains("first"))
-                            {
-                                SharedPreferences pref = context.getSharedPreferences("User", Context.MODE_PRIVATE);
-                                SharedPreferences.Editor editor = pref.edit();
-                                editor.putString("lightType", "0");
-                                editor.putString("switchType", "OFF");
-                                editor.apply();
-                            }
-                            else if(command.contains("second"))
-                            {
-                                SharedPreferences pref = context.getSharedPreferences("User", Context.MODE_PRIVATE);
-                                SharedPreferences.Editor editor = pref.edit();
-                                editor.putString("lightType", "1");
-                                editor.putString("switchType", "OFF");
-                                editor.apply();
-                            }
-                            else if(command.contains("third"))
-                            {
+                    command.replace(commands[i], "");
+                    Toast.makeText(context.getApplicationContext(), command, Toast.LENGTH_SHORT);
+                    System.out.println("COMMAND");
+                    if (command.contains("on"))
+                        if (command.contains("first"))
+                        {
+                            SharedPreferences pref = context.getSharedPreferences("User", Context.MODE_PRIVATE);
+                            SharedPreferences.Editor editor = pref.edit();
+                            editor.putString("lightType", "0");
+                            editor.putString("switchType", "ON");
+                            editor.apply();
+                        } else if (command.contains("second"))
+                        {
+                            SharedPreferences pref = context.getSharedPreferences("User", Context.MODE_PRIVATE);
+                            SharedPreferences.Editor editor = pref.edit();
+                            editor.putString("lightType", "1");
+                            editor.putString("switchType", "ON");
+                            editor.apply();
+                        } else if (command.contains("third"))
+                        {
                             SharedPreferences pref = context.getSharedPreferences("User", Context.MODE_PRIVATE);
                             SharedPreferences.Editor editor = pref.edit();
                             editor.putString("lightType", "2");
-                            editor.putString("switchType", "OFF");
+                            editor.putString("switchType", "ON");
                             editor.apply();
-                            }
-
-                            //request for light
-
-                            if(command.contains("first"))
-                            {
-                                SharedPreferences pref = context.getSharedPreferences("User", Context.MODE_PRIVATE);
-                                SharedPreferences.Editor editor = pref.edit();
-                                editor.putString("lightType", "0");
-                                editor.putString("switchType", "ON");
-                                editor.apply();
-                            }
-                            else if(command.contains("second"))
-                            {
-                                SharedPreferences pref = context.getSharedPreferences("User", Context.MODE_PRIVATE);
-                                SharedPreferences.Editor editor = pref.edit();
-                                editor.putString("lightType", "1");
-                                editor.putString("switchType", "ON");
-                                editor.apply();
-                            }
-                            else if(command.contains("third"))
-                            {
-                                SharedPreferences pref = context.getSharedPreferences("User", Context.MODE_PRIVATE);
-                                SharedPreferences.Editor editor = pref.edit();
-                                editor.putString("lightType", "2");
-                                editor.putString("switchType", "ON");
-                                editor.apply();
-                            }
-
-                            Intent postState = new Intent(context.getApplicationContext(), POSTtoMainServer.class);
-                            context.getApplicationContext().startService(postState);
-                            context.getApplicationContext().stopService(postState);
-
-                            //request for light
                         }
+
+                    //request for light
+
+                    Intent postState = new Intent(context.getApplicationContext(), POSTtoMainServer.class);
+                    context.getApplicationContext().startService(postState);
+                    context.getApplicationContext().stopService(postState);
+
+                    //request for light
+                }
+                else if (command.contains("off"))
+                {
+                    if (command.contains("first"))
+                    {
+                        SharedPreferences pref = context.getSharedPreferences("User", Context.MODE_PRIVATE);
+                        SharedPreferences.Editor editor = pref.edit();
+                        editor.putString("lightType", "0");
+                        editor.putString("switchType", "ON");
+                        editor.apply();
+                    } else if (command.contains("second"))
+                    {
+                        SharedPreferences pref = context.getSharedPreferences("User", Context.MODE_PRIVATE);
+                        SharedPreferences.Editor editor = pref.edit();
+                        editor.putString("lightType", "1");
+                        editor.putString("switchType", "ON");
+                        editor.apply();
+                    } else if (command.contains("third"))
+                    {
+                        SharedPreferences pref = context.getSharedPreferences("User", Context.MODE_PRIVATE);
+                        SharedPreferences.Editor editor = pref.edit();
+                        editor.putString("lightType", "2");
+                        editor.putString("switchType", "ON");
+                        editor.apply();
+                    }
+                }
             }
         }
 
