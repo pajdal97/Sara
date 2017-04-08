@@ -1,4 +1,5 @@
 <?php
+$_GET['status'] = strtolower($_GET['status']);
 /**
  * Created by IntelliJ IDEA.
  * User: pajdal97
@@ -22,6 +23,9 @@ if(isset($listValues)) {
                 case "id":
                     if (isset($_GET['find_v'])) {
                         $finded = $db->query("SELECT * FROM objects WHERE id=".$_GET['find_v']);
+                        if($_GET['type'] == "door") {
+                            $db->query("INSERT INTO history (timestamp,value,door_id) VALUES (" . time() . ",'" . $_GET['status'] . "',".$_GET['find_v'].")");
+                        }
                     } else {
                         $result = "undefined_find";
                     }
