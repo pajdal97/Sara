@@ -10,8 +10,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
-import android.widget.Switch;
-import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -36,7 +34,7 @@ public class LedFragment extends Fragment {
         ArrayList<String> states = GETfromMainServer.getOnOffStates();
 
 
-        CountDownTimer timer = new CountDownTimer(3000, 1000) {
+        CountDownTimer timer = new CountDownTimer(1000, 1000) {
             public void onTick(long millisUntilFinished) {
             }
 
