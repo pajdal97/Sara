@@ -28,10 +28,8 @@ public class FragmentClass extends Fragment {
         final TextView temp = (TextView) rootView.findViewById(R.id.tempeatureTV);
 
         Calendar cal = Calendar.getInstance();
-        SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
+        SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.y,yyy");
         SimpleDateFormat sdf2 = new SimpleDateFormat("HH:mm");
-
-
 
         final TextView timeTV = (TextView) rootView.findViewById(R.id.timeTV);
         timeTV.setText(sdf2.format(cal.getTime()));
@@ -61,7 +59,10 @@ public class FragmentClass extends Fragment {
                 }
                 clouds.setText(pocasi);
                 if(Objects.equals(pocasi, "Rain")){
-                  //  imageView.setImageIcon(R.mipmap.weather);
+                    imageView.setImageResource(R.mipmap.rainy);
+                }
+                else if(Objects.equals(pocasi, "Clouds")){
+                    imageView.setImageResource(R.mipmap.cloud);
                 }
 
             }
