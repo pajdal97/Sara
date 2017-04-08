@@ -2,18 +2,41 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <TextView
-        android:id="@+id/year_month"
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
-        android:text="March 2017"
-        android:textSize="20dp"/>
+        android:orientation="horizontal"
+        android:layout_marginLeft="10dp"
+        android:layout_gravity="right">
+
+        <TextView
+            android:id="@+id/year_month"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:text="March 2017"
+            android:textSize="18dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/seconds_remaining"
+            android:textSize="16dp"
+            android:text="aodsdsadlso"
+            android:layout_marginLeft="10dp"/>
+        <ImageButton
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:src="@drawable/delete_icon"
+            android:layout_marginLeft="50dp"
+            android:id="@+id/delete"/>
+        </LinearLayout>
 
     <TextView
         android:id="@+id/hour_minute"
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
         android:textSize="15dp"
-        android:text="20:32 AM"/>
+        android:text="20:32 AM"
+        android:layout_marginLeft="10dp"/>
 
 </LinearLayout>

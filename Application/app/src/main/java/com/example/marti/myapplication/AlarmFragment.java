@@ -5,12 +5,14 @@ import android.app.TimePickerDialog;
 import android.content.Context;
 import android.icu.util.Calendar;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.DatePicker;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.TimePicker;
@@ -23,6 +25,8 @@ public class AlarmFragment extends Fragment{
 
     public ListView alarmList;
     public ArrayList<Texts> alarms;
+    public ArrayList<CountDownTimer> timers;
+    public BaseAdapter adapter;
     private int year, month, day , hours, minutes;
     private int yearFinal ,monthFinal , dayFinal , hoursFinal , minutesFinal;
 
@@ -32,20 +36,27 @@ public class AlarmFragment extends Fragment{
         View v = inflater.inflate(R.layout.fragment_alarm, container, false);
         alarmList = (ListView) v.findViewById(R.id.alarms);
         alarms = new ArrayList<>();
-        final BaseAdapter adapter = new AlarmAdapter(getActivity(),alarms);
+        timers = new ArrayList<>();
+        adapter = new AlarmAdapter(getActivity(),alarms);
         alarmList.setAdapter(adapter);
 
         v.findViewById(R.id.add_alarm).setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                addAlarm(adapter);
+                addAlarm();
             }
         });
 
+        v.findViewById(R.id.delete).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v){
+
+            }
+        });
         return v;
     }
 
-    public void addAlarm(final BaseAdapter adapter){
+    public void addAlarm(){
         Calendar calendar = Calendar.getInstance();
         year = calendar.get(Calendar.YEAR);
         month = calendar.get(Calendar.MONTH);
@@ -53,7 +64,7 @@ public class AlarmFragment extends Fragment{
 
         DatePickerDialog datePickerDialog = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener(){
             @Override
-            public void onDateSet(DatePicker view, int year, final int month, int dayOfMonth) {
+            public void onDateSet(DatePicker view, final int year, final int month, int dayOfMonth) {
                 yearFinal = year;
                 monthFinal = month+1;
                 dayFinal = dayOfMonth;
@@ -83,9 +94,13 @@ public class AlarmFragment extends Fragment{
                         addZero(hm,minutesFinal);
 
                         hm.append(""+minutesFinal+" "+getDayStage(hoursFinal));
-                        alarms.add(new Texts(ym.toString(),hm.toString()));
-                        adapter.notifyDataSetChanged();
-                        getSeconds();
+                        if(getSeconds()>0 && day<=dayFinal && month<=monthFinal && year<= yearFinal){
+                            alarms.add(new Texts(ym.toString(),hm.toString(),getSeconds()));
+                            adapter.notifyDataSetChanged();
+                            new MyTimer(alarms.size()-1);
+                        }else{
+                            Toast.makeText(getActivity(),"Not a validate datum",Toast.LENGTH_SHORT).show();
+                        }
                     }
                 },hours, minutes, true);
                 timePickerDialog.show();
@@ -94,13 +109,27 @@ public class AlarmFragment extends Fragment{
         datePickerDialog.show();
     }
 
-    public void getSeconds(){
-        //-2460 1:27 8:00 6
+    private class MyTimer{
+        public MyTimer(final int index){
+            timers.add(new CountDownTimer(getSeconds()*1000,1000){
+                @Override
+                public void onTick(long millisUntilFinished) {
+                    alarms.get(index).setSecondsRemain(millisUntilFinished/1000);
+                    adapter.notifyDataSetChanged();
+                }
+
+                @Override
+                public void onFinish() {
+                    //send request to server lmao
+                }
+            }.start());
+        }
+    }
+
+    public int getSeconds(){
         int a = minutes*60 + hours*3600;//to seconds
         int b = minutesFinal*60 + hoursFinal*3600;//final to seconds
-        int finalSeconds = b - a;
-        Toast.makeText(getActivity(),finalSeconds,Toast.LENGTH_SHORT).show();
-
+        return (b - a);
     }
 
     public void addZero(StringBuilder builder,int value){
@@ -128,6 +157,7 @@ public class AlarmFragment extends Fragment{
             default:return "none";
         }
     }
+
     public class AlarmAdapter extends BaseAdapter{
 
         private ArrayList<Texts> alarms;
@@ -158,9 +188,16 @@ public class AlarmFragment extends Fragment{
             View view = LayoutInflater.from(context).inflate(R.layout.alarm_layout,null);
             TextView ym_time = (TextView) view.findViewById(R.id.year_month);
             TextView hm_time = (TextView) view.findViewById(R.id.hour_minute);
+            TextView time_remain = (TextView) view.findViewById(R.id.seconds_remaining);
             ym_time.setText(alarms.get(position).getYm());
             hm_time.setText(alarms.get(position).getHm());
+            time_remain.setText("(remaining "+(int) alarms.get(position).getSecondsRemain()+" s)");
+            ImageButton deleteButton = (ImageButton) view.findViewById(R.id.delete);
+            deleteButton.setTag(position);
             return view;
         }
+    }
+    public void deleteItem(){
+
     }
 }
